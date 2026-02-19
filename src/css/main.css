@@ -1,12 +1,69 @@
-*{
-    background-color:#ecd0ec;
-    color: white !important;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+* {
+    font-family: "Montserrat", sans-serif;
 }
 
-#navbar{
-    width: 100%;
+.custom-navbar {
+    background-color: #ecd0ec;
 }
 
-#banner{
-    margin-top: 1%;
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link {
+    color: #461d3a;
+}
+
+.custom-navbar .nav-link:hover {
+    color: #2d0f24;
+}
+
+.custom-navbar .btn-secondary {
+    background-color: #461d3a;
+    border-color: #461d3a;
+}
+
+.custom-navbar .btn-outline-secondary {
+    color: #461d3a;
+    border-color: #461d3a;
+}
+
+.custom-navbar .btn-outline-secondary:hover {
+    background-color: #461d3a;
+    color: #fff;
+}
+
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link {
+    font-weight: 700;
+}
+
+.custom-navbar .btn {
+    font-weight: 400;
+}
+
+.custom-navbar .navbar-brand {
+    font-weight: 700;
+}
+
+.custom-navbar .nav-link {
+    font-weight: 600;
+}
+
+#banner {
+    background-color: #ba71a2;
+}
+
+#banner h1,
+#banner p {
+    color: #461d3a;
+}
+
+#banner .btn {
+    background-color: #461d3a;
+    color: #fff;
+    border: none;
+}
+
+#banner .btn:hover {
+    background-color: #3a162f;
 }
