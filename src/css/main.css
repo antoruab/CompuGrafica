@@ -1,4 +1,12 @@
 *{
-    background-color: #0050e0;
-    color: #FFFFFF;
+    background-color:#ecd0ec;
+    color: white !important;
+}
+
+#navbar{
+    width: 100%;
+}
+
+#banner{
+    margin-top: 1%;
 }
