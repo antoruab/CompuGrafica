@@ -72,3 +72,17 @@ function onWindowResize() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 
 }
+
+document.getElementById("myButton").addEventListener("click", createObject);
+
+function createObject() {
+    let x = document.getElementById("x").value;
+    let y = document.getElementById("y").value;
+    let z = document.getElementById("z").value;
+    let myColor = document.getElementById("Color").value;
+
+    const geometryCube = new THREE.BoxGeometry(x, y, z);
+    const materialCube = new THREE.MeshBasicMaterial({ color: myColor, wireframe: true });
+    const cube = new THREE.Mesh(geometryCube, materialCube);
+    scene.add(cube);
+}
