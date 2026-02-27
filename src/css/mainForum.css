@@ -1,0 +1,97 @@
+/*Importar fuente tipográfica*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+* {
+    font-family: "Montserrat", sans-serif;
+}
+
+/*Estilo NavBar*/
+.custom-navbar {
+    background-color: #ecd0ec;
+}
+
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link {
+    color: #461d3a;
+}
+
+.custom-navbar .nav-link:hover {
+    color: #2d0f24;
+}
+
+.custom-navbar .btn-secondary {
+    background-color: #461d3a;
+    border-color: #461d3a;
+}
+
+.custom-navbar .btn-outline-secondary {
+    color: #461d3a;
+    border-color: #461d3a;
+}
+
+.custom-navbar .btn-outline-secondary:hover {
+    background-color: #461d3a;
+    color: #fff;
+}
+
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link {
+    font-weight: 700;
+}
+
+.custom-navbar .btn {
+    font-weight: 400;
+}
+
+.custom-navbar .navbar-brand {
+    font-weight: 700;
+}
+
+.custom-navbar .nav-link {
+    font-weight: 600;
+}
+
+/* Fondo general */
+body {
+    background-color: #7e2a53;
+}
+
+/* Título principal */
+.titulo-galeria {
+    font-size: 48px;
+    color: white;
+    font-weight: bold;
+}
+
+/* Cards */
+.custom-card {
+    background-color: #ecd0ec;
+    border: none;
+    border-radius: 10px;
+    text-align: center; /* Centra todo el texto */
+}
+
+/* Espacio para imagen */
+.image-placeholder {
+    height: 180px;
+    background-color: #d6b6d6;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+/* Títulos dentro de las cards */
+.titulo-card {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* Botón personalizado */
+.btn-custom {
+    background-color: #7e2a53;
+    color: white;
+    border: none;
+}
+
+.btn-custom:hover {
+    background-color: #5e1f3e;
+}
