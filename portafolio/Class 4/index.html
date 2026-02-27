@@ -59,34 +59,88 @@
         </nav>
     </section>
 
-    <div class="card myCreateElement">
-        <div class="card-header">
-            Create Object
-        </div>
+    <div class="container-fluid">
+        <div class="row">
 
-        <div class="card-body">
-            <h5 class="card-title">Cube</h5>
+            <nav class="col-md-4 col-lg-3 bg-light p-4 border-end" style="min-height: 90vh;">
+                <h4 class="mb-4">Create Object</h4>
 
-            <div class="mb-3">
-                <label for="x" class="form-label">x (width):</label>
-                <input type="number" class="form-control" id="x" aria-describedby="x">
-            </div>
-            <div class="mb-3">
-                <label for="y" class="form-label">y (height):</label>
-                <input type="number" class="form-control" id="y" aria-describedby="y">
-            </div>
-            <div class="mb-3">
-                <label for="z" class="form-label">z (depth):</label>
-                <input type="number" class="form-control" id="z" aria-describedby="z">
-            </div>
-            <div class="mb-3">
-                <label for="Color" class="form-label">Color:</label>
-                <input type="color" class="form-control" id="Color" aria-describedby="Color">
-            </div>
-            <button id="myButton" class="btn btn-primary">Create</button>
+                <div class="mb-4">
+                    <label for="shapeSelect" class="form-label fw-bold">Select Geometry:</label>
+                    <select id="shapeSelect" class="form-select" onchange="toggleInputs()">
+                        <option value="cube">Cube</option>
+                        <option value="torus">Torus</option>
+                        <option value="cone">Cone</option>
+                    </select>
+                </div>
+
+                <div id="inputs-cube" class="shape-inputs">
+                    <h6 class="text-primary border-bottom pb-2">Cube Parameters</h6>
+                    <div class="mb-2">
+                        <label for="cube-x" class="form-label">x (width):</label>
+                        <input type="number" class="form-control form-control-sm" id="cube-x" value="1">
+                    </div>
+                    <div class="mb-2">
+                        <label for="cube-y" class="form-label">y (height):</label>
+                        <input type="number" class="form-control form-control-sm" id="cube-y" value="1">
+                    </div>
+                    <div class="mb-2">
+                        <label for="cube-z" class="form-label">z (depth):</label>
+                        <input type="number" class="form-control form-control-sm" id="cube-z" value="1">
+                    </div>
+                </div>
+
+                <div id="inputs-torus" class="shape-inputs" style="display: none;">
+                    <h6 class="text-primary border-bottom pb-2">Torus Parameters</h6>
+                    <div class="mb-2">
+                        <label for="torus-r" class="form-label">r (radius):</label>
+                        <input type="number" class="form-control form-control-sm" id="torus-r" value="1">
+                    </div>
+                    <div class="mb-2">
+                        <label for="torus-t" class="form-label">t (tube):</label>
+                        <input type="number" class="form-control form-control-sm" id="torus-t" value="0.4">
+                    </div>
+                    <div class="mb-2">
+                        <label for="torus-rs" class="form-label">rs (radialSegments):</label>
+                        <input type="number" class="form-control form-control-sm" id="torus-rs" value="12">
+                    </div>
+                    <div class="mb-2">
+                        <label for="torus-ts" class="form-label">ts (tubularSegments):</label>
+                        <input type="number" class="form-control form-control-sm" id="torus-ts" value="48">
+                    </div>
+                </div>
+
+                <div id="inputs-cone" class="shape-inputs" style="display: none;">
+                    <h6 class="text-primary border-bottom pb-2">Cone Parameters</h6>
+                    <div class="mb-2">
+                        <label for="cone-r" class="form-label">r (radius):</label>
+                        <input type="number" class="form-control form-control-sm" id="cone-r" value="1">
+                    </div>
+                    <div class="mb-2">
+                        <label for="cone-h" class="form-label">h (height):</label>
+                        <input type="number" class="form-control form-control-sm" id="cone-h" value="2">
+                    </div>
+                    <div class="mb-2">
+                        <label for="cone-rs" class="form-label">rs (radialSegments):</label>
+                        <input type="number" class="form-control form-control-sm" id="cone-rs" value="32">
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <div class="mb-3">
+                        <label for="objectColor" class="form-label fw-bold">Color:</label>
+                        <input type="color" class="form-control form-control-color w-100" id="objectColor"
+                            value="#007bff">
+                    </div>
+                    <button id="btnCreate" class="btn btn-primary w-100">Create Geometry</button>
+                </div>
+            </nav>
+
+            <main class="col-md-8 col-lg-9 p-0" id="canvas-container">
+            </main>
+
         </div>
     </div>
-
 
 </body>
 
