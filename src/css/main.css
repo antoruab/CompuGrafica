@@ -70,3 +70,94 @@
 #banner .btn:hover {
     background-color: #3a162f;
 }
+
+section {
+    border-bottom: 8px solid #ffffff;
+}
+
+#course-units {
+    background-color: #7e2a53;
+}
+
+#course-units h2 {
+    font-size: 48px;
+    color: #ecd0ec;
+}
+
+#course-units .bg-light {
+    font-size: 16px;
+    background-color: #ecd0ec !important;
+}
+
+#course-units h5 {
+    color: #7e2a53;
+    font-weight: 700;
+}
+
+#course-units p {
+    color: #461d3a;
+}
+
+#github {
+    background-color: #502a50;
+    text-align: center;
+}
+
+#github h2 {
+    font-size: 48px;
+    color: #ba71a2;
+}
+
+#github p {
+    font-size: 24px;
+    color: #ba71a2;
+}
+
+#github .btn {
+    background-color: #7e2a53;
+    color: #ffffff;
+    border: none;
+}
+
+#github .btn:hover {
+    background-color: #642145;
+}
+
+#teacher-support {
+    background-color: #ba71a2;
+}
+
+#teacher-support h2 {
+    font-size: 48px;
+    color: #461d3a;
+}
+
+#teacher-support p {
+    font-size: 24px;
+    color: #461d3a;
+}
+
+#forum {
+    background-color: #7e2a53;
+    text-align: center;
+}
+
+#forum h2 {
+    font-size: 48px;
+    color: #ecd0ec;
+}
+
+#forum p {
+    font-size: 24px;
+    color: #ecd0ec;
+}
+
+#forum .btn {
+    background-color: #ba71a2;
+    color: #ffffff;
+    border: none;
+}
+
+#forum .btn:hover {
+    background-color: #a45a8f;
+}
