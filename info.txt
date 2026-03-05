@@ -1,0 +1,105 @@
+HTML
+
+
+Con HTML se construye la estructura de una página web (como el esqueleto). Luego CSS se encarga del diseño y JavaScript del comportamiento.
+
+El archivo index.html es la página principal de un sitio web.
+
+DOCTYPE es una declaración que se coloca al inicio de un documento HTML y le dice al navegador qué versión de HTML se está usando.
+Su función principal es evitar errores y hacer que el navegador muestre la página correctamente.
+
+<li>: elemento de la lista.
+
+
+class es un atributo de HTML que sirve para asignar estilos o comportamientos a uno o varios elementos al mismo tiempo.
+
+d-flex:  Sirve para Organizar elementos en fila o columna y alinear contenido fácilmente
+
+gap-2: Agrega espacio entre los elementos dentro de un flex o grid. gap-1 pequeño  gap-2 medio  gap-3 más grande
+
+col-lg-6: Controla el tamaño de una columna en pantallas grandes. col = columna   lg = large (pantallas grandes)   6 = ocupa la mitad (Bootstrap usa 12 columnas)
+
+mb-4: Significa margin-bottom: 4   Da espacio abajo del elemento.
+
+mb-lg-0: Quita el margen inferior solo en pantallas grandes.  Responsive  Se adapta al tamaño de pantalla
+
+mt-3: Significa margin-top: 3  Espacio arriba del elemento.
+
+py-5: p = padding   y = eje vertical (arriba y abajo)  5 = tamaño del espacio   Espacio interno arriba y abajo
+
+row: Crea una fila dentro del sistema de columnas.
+
+g-4: Significa gap (espacio) entre columnas
+
+col-md-3:  md = medium (tablets)  3 = 3 columnas de 12
+
+
+JAVASCRIPT
+
+
+JavaScript controla el comportamiento: botones que funcionan, animaciones, juegos, formularios, gráficos y contenido en tiempo real.
+
+let: variable que puede cambiar
+const: variable que no cambia
+
+
+
+
+
+
+
+
+
+
+
+
+CSS
+
+
+CSS es el lenguaje que se usa para dar diseño y estilo a una página web.
+
+Selectores (para elegir elementos)
+Propiedades (qué se cambia)
+Valores (cómo se cambia)
+
+selector {
+  propiedad: valor;
+}
+
+* = Función: Selecciona todos los elementos HTML en un documento (etiquetas <div>, <p>, <h1>, etc.).
+# = Función: Selecciona un único elemento HTML que tenga un atributo id específico. Es altamente específico y tiene prioridad alta.
+
+Fondo
+
+background-color
+background-image
+background-size
+background-position
+
+
+-Tamaño y espacio
+
+width
+height
+margin
+padding
+
+
+-Bordes
+
+border
+border-radius
+
+
+-Posición
+
+display
+position
+top, left, right, bottom
+z-index
+
+
+-Layout 
+
+flex
+grid
