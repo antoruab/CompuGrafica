@@ -15,6 +15,11 @@
     color: #461d3a;
 }
 
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link {
+    color: #461d3a;
+}
+
 .custom-navbar .nav-link:hover {
     color: #2d0f24;
 }
