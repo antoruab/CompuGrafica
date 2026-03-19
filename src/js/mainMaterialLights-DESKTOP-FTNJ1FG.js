@@ -20,41 +20,37 @@ scene.add(directionalLight);
 
 // First Geometry Shape
 const geometry = new THREE.BoxGeometry(1, 1, 1);
-
-const material = new THREE.MeshBasicMaterial({ color: 0x000080, transparent: true, opacity: 1, wireframe: true, wireframeLineMaterial: 6});
+const material = new THREE.MeshBasicMaterial({ color: 0x000080, transparent: true, opacity: 0.5, wireframe: true, wireframeLineMaterial: 6 });
 
 const materialStand = new THREE.MeshStandardMaterial({ color: 0xff00ff, roughness: 0.5, metalness: 1.0, transparent: false });
 
 const materialPhong = new THREE.MeshPhongMaterial({
     color: 0xffffff, specular: 0xffffff, shininess: 30, side: THREE.DoubleSide,
-    map: new THREE.TextureLoader().load('../../portafolio/Class 6/img/uv_test_bw_1024.png') }); //Ejemplo https://threejs.org/examples/textures/uv_grid_opengl.jpg
+    map: new THREE.TextureLoader().load('../../portafolio/Class 6/img/uv_test_bw_1024.png')
+}); //Ejemplo https://threejs.org/examples/textures/uv_grid_opengl.jpg
 
 const materialNormal = new THREE.MeshNormalMaterial({ color: 0xff0080, transparent: true, opacity: 1, wireframe: true, wireframeLinewidth: 5, wireframeLinejoin: 'round', wireframeLinecap: 'round' });
 
-const materialCube = [new THREE.MeshStandardMaterial( { map: new THREE.TextureLoader().load( '../../portafolio/Class 6/img/face1.jpg'), side: THREE.DoubleSide}),
-    new THREE.MeshStandardMaterial( { map: new THREE.TextureLoader().load( '../../portafolio/Class 6/img/face2.png'), side: THREE.DoubleSide}),
-    new THREE.MeshStandardMaterial( { map: new THREE.TextureLoader().load( '../../portafolio/Class 6/img/face3.jpg'), side: THREE.DoubleSide}),
-    new THREE.MeshStandardMaterial( { map: new THREE.TextureLoader().load( '../../portafolio/Class 6/img/face4.jpg'), side: THREE.DoubleSide}),
-    new THREE.MeshStandardMaterial( { map: new THREE.TextureLoader().load( '../../portafolio/Class 6/img/face5.png'), side: THREE.DoubleSide}),
-    new THREE.MeshStandardMaterial( { map: new THREE.TextureLoader().load( '../../portafolio/Class 6/img/face6.jpg'), side: THREE.DoubleSide})];
+const materialCube = [new THREE.MeshStandardMaterial({ map: new THREE.TextureLoader().load('../../portafolio/Class 6/img/face1.jpg'), side: THREE.DoubleSide }),
+new THREE.MeshStandardMaterial({ map: new THREE.TextureLoader().load('../../portafolio/Class 6/img/face2.png'), side: THREE.DoubleSide }),
+new THREE.MeshStandardMaterial({ map: new THREE.TextureLoader().load('../../portafolio/Class 6/img/face3.jpg'), side: THREE.DoubleSide }),
+new THREE.MeshStandardMaterial({ map: new THREE.TextureLoader().load('../../portafolio/Class 6/img/face4.jpg'), side: THREE.DoubleSide }),
+new THREE.MeshStandardMaterial({ map: new THREE.TextureLoader().load('../../portafolio/Class 6/img/face5.png'), side: THREE.DoubleSide }),
+new THREE.MeshStandardMaterial({ map: new THREE.TextureLoader().load('../../portafolio/Class 6/img/face6.jpg'), side: THREE.DoubleSide })];
 
-const materialLambert = new THREE.MeshLambertMaterial( { color: 0xf3ffe2, emissive: 0xff00000, emissiveIntensity: 0.1, side: THREE.DoubleSide, 
-    map: new THREE.TextureLoader().load( '../../portafolio/Class 6/img/wool.jpg' )});
+const materialLambert = new THREE.MeshLambertMaterial({
+    color: 0xf3ffe2, emissive: 0xff00000, emissiveIntensity: 0.1, side: THREE.DoubleSide,
+    map: new THREE.TextureLoader().load('../../portafolio/Class 6/img/wool.jpg')
+});
 
 const materialDepth = new THREE.MeshDepthMaterial();
 
-const materialPoints = new THREE.PointsMaterial({color: 0x7e2a53, size: 0.05});
+const materialPoints = new THREE.PointsMaterial({ color: 0x7e2a53, size: 0.05 });
 
-const materialLineDashed = new THREE.LineDashedMaterial({dashSize: 2, gapSize: 2});
+const materialLineDashed = new THREE.LineDashedMaterial({ dashSize: 2, gapSize: 2 });
 
-const cube1 = new THREE.Mesh(geometry, material);
-cube1.position.x = -1.5;
+/* const materialSprite = new THREE.SpriteMaterial({ map: new THREE.TextureLoader().load('../../portafolio/Class 6/img/wool.jpg')}); */
 
-const cube2 = new THREE.Mesh(geometry, materialStand);
-cube2.position.x = 0;
-
-const cube3 = new THREE.Mesh(geometry, materialPhong);
-cube3.position.x = 1.5;
 
 const cube4 = new THREE.Mesh(geometry, materialLambert);
 cube4.position.x = -1.5;
@@ -66,11 +62,11 @@ cube5.position.y = 1.5;
 
 const cube6 = new THREE.Mesh(geometry, materialNormal);
 cube6.position.x = 1.5;
-cube6.position.y = 1.5; 
+cube6.position.y = 1.5;
 
 const cube7 = new THREE.Mesh(geometry, materialDepth);
 cube7.position.x = -1.5;
-cube7.position.y = -1.5; 
+cube7.position.y = -1.5;
 
 const cube8 = new THREE.Mesh(geometry, materialPoints);
 cube8.position.x = 0;
@@ -84,6 +80,12 @@ cube9.position.y = -1.5;
 cube10.position.x = 0;
 cube10.position.y = -3.0; */
 
+/* // LineDashedMaterial - requiere computeLineDistances()
+const edges = new THREE.EdgesGeometry(geometry);
+const lineLoop = new THREE.LineSegments(edges, materialLineDashed);
+lineLoop.computeLineDistances(); // ← obligatorio para que funcione el dashed
+lineLoop.position.x = 6.0;
+scene.add(lineLoop); */
 
 scene.add(cube1);
 scene.add(cube2);
