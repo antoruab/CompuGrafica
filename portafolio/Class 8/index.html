@@ -5,61 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D Modeling</title>
-
-    <link rel="icon" type="image/png" href="../../src/img/Icono computador.png">
     <link rel="stylesheet" href="./src/css/main.css">
-    
     <!-- Import the component -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.2.0/model-viewer.min.js"></script>
 </head>
 
 <body>
-<section id="navbar">
-        <nav class="navbar navbar-expand-lg custom-navbar">
-            <div class="container-fluid">
-                <a class="navbar-brand d-flex align-items-center" href="../../index.html">
-                    <img src="../../src/img/Icono computador.png" alt="Logo" width="40" class="me-2">
-                    Computer Graphics
-                </a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+    <div class="st">
 
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Units</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">GitHub</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Teacher support</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Forum and activities</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Resources</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-                    </ul>
+        <div class="st-top">
+            <div class="st-bound st-bound-full"></div>
+            <p><span class="st-drop st-stranger-s">S</span><span class="st-stranger-t">t</span><span
+                    class="st-stranger-r">r</span><span class="st-stranger-a">a</span><span
+                    class="st-stranger-n">n</span><span class="st-stranger-g">g</span><span
+                    class="st-stranger-e">e</span><span class="st-drop st-stranger-r-2">r</span>
+            </p>
+            <div class="st-bound st-bound-mini st-bound-left"></div>
+            <div class="st-bound st-bound-mini st-bound-right"></div>
+        </div>
 
-                    <div class="d-flex gap-2">
-                        <a href="#" class="btn btn-outline-secondary">Log in</a>
-                        <a href="#" class="btn btn-secondary">Sign up</a>
-                    </div>
+        <div class="st-bottom">
+            <p><span class="st-things-t">T</span><span class="st-things-h">h</span><span
+                    class="st-things-i">i</span><span class="st-things-n">n</span><span
+                    class="st-things-g">g</span><span class="st-things-s">s</span></p>
+        </div>
 
-                </div>
-            </div>
-        </nav>
-    </section>
+    </div>
 
-   <!-- Use it like any other HTML element -->
-    <model-viewer 
-      alt="Scene 3d" 
-      src="./src/models/glb/scene.glb" 
-      ar 
-      shadow-intensity="1" 
-      camera-controls 
-      touch-action="pan-y">
+    <!-- Use it like any other HTML element -->
+    <model-viewer alt="Scene 3d" src="./src/models/glb/scene.glb" ar shadow-intensity="1" camera-controls
+        touch-action="pan-y">
     </model-viewer>
 
     <!-- environment-image="shared-assets/environments/moon_1k.hdr" 
       poster="shared-assets/models/NeilArmstrong.webp"  -->
-
 </body>
 
 </html>
