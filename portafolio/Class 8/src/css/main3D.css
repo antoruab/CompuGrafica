@@ -1,0 +1,68 @@
+/*Importar fuente tipográfica*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+* {
+    font-family: "Montserrat", sans-serif;
+}
+
+/*Estilo NavBar*/
+.custom-navbar {
+    background-color: #ecd0ec;
+}
+
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link {
+    color: #461d3a;
+}
+
+.custom-navbar .nav-link:hover {
+    color: #2d0f24;
+}
+
+.custom-navbar .btn-secondary {
+    background-color: #461d3a;
+    border-color: #461d3a;
+}
+
+.custom-navbar .btn-outline-secondary {
+    color: #461d3a;
+    border-color: #461d3a;
+}
+
+.custom-navbar .btn-outline-secondary:hover {
+    background-color: #461d3a;
+    color: #fff;
+}
+
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link {
+    font-weight: 700;
+}
+
+.custom-navbar .btn {
+    font-weight: 400;
+}
+
+.custom-navbar .navbar-brand {
+    font-weight: 700;
+}
+
+.custom-navbar .nav-link {
+    font-weight: 600;
+}
+
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(123, 208, 247);
+    overflow: hidden; /* Prevents scrolling when in full screen */
+}
+
+model-viewer {
+    width: 100vw; /* 100% of the viewport width */
+    height: 100vh; /* 100% of the viewport height */
+    border: none;
+}
