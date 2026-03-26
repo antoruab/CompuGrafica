@@ -3,7 +3,7 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color: blue;
+    background-color: rgb(158, 158, 236);
     overflow: hidden; /* Prevents scrolling when in full screen */
 }
 
