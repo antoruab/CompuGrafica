@@ -51,7 +51,8 @@
     font-weight: 600;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
@@ -64,8 +65,8 @@ html, body {
     padding: 1.5rem 0 0.5rem 0;
     background-color: rgb(123, 208, 247);
 }
- 
- 
+
+
 .peanuts-logo {
     max-width: 300px;
     width: 50%;
@@ -103,7 +104,7 @@ model-viewer {
     position: absolute;
     bottom: 16px;
 }
- 
+
 .slides {
     display: flex;
     justify-content: center;
@@ -114,7 +115,7 @@ model-viewer {
     gap: 12px;
     padding: 0 16px;
 }
- 
+
 .slide {
     scroll-snap-align: start;
     flex-shrink: 0;
@@ -129,34 +130,54 @@ model-viewer {
     cursor: pointer;
     transition: border-color 0.2s, transform 0.2s;
 }
- 
+
 .slide:hover {
     transform: scale(1.05);
     border-color: #1a7aab;
 }
- 
+
 .slide.selected {
     border: 3px solid #1a7aab;
     box-shadow: 0 0 8px rgba(26, 122, 171, 0.4);
 }
- 
-.slide:focus { outline: none; }
-.slide:focus-visible { outline: 2px solid #1a7aab; }
- 
+
+.slide:focus {
+    outline: none;
+}
+
+.slide:focus-visible {
+    outline: 2px solid #1a7aab;
+}
+
 #ar-button {
+    background-image: url(../img/btn.png);
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 12px 50%;
     background-color: #fff;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
     bottom: 132px;
-    padding: 0 16px;
+    padding: 0px 16px 0px 40px;
     font-family: "Montserrat", sans-serif;
     font-size: 14px;
     color: #1a7aab;
     height: 36px;
     line-height: 36px;
     border-radius: 18px;
-    border: 2px solid #1a7aab;
-    cursor: pointer;
+    border: 1px solid #DADCE0;
+}
+
+#ar-button:active {
+    background-color: #E8EAED;
+}
+
+#ar-button:focus {
+    outline: none;
+}
+
+#ar-button:focus-visible {
+    outline: 1px solid #1a7aab;
 }
