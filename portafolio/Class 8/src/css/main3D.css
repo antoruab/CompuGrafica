@@ -67,7 +67,7 @@ html, body {
  
  
 .peanuts-logo {
-    max-width: 300px; /* Antes 420px, lo bajamos */
+    max-width: 300px;
     width: 50%;
     height: auto;
     display: block;
@@ -87,7 +87,7 @@ html, body {
 model-viewer {
     width: 100%;
     flex: 1;
-    min-height: 0; /* Clave: evita que el viewer ignore el flex y se desborde */
+    min-height: 0;
     display: block;
     background-color: rgb(123, 208, 247);
     border: none;
