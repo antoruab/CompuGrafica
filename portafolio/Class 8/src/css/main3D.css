@@ -65,33 +65,36 @@ html, body {
     background-color: rgb(123, 208, 247);
 }
  
+ 
 .peanuts-logo {
-    max-width: 420px;
-    width: 80%;
+    max-width: 300px; /* Antes 420px, lo bajamos */
+    width: 50%;
     height: auto;
     display: block;
     margin: 0 auto;
 }
- 
+
 .viewer-container {
     width: 100%;
     height: calc(100vh - 56px);
+    max-height: 100vh;
     background-color: rgb(123, 208, 247);
     overflow: hidden;
     display: flex;
     flex-direction: column;
 }
-  
+
 model-viewer {
     width: 100%;
     flex: 1;
+    min-height: 0; /* Clave: evita que el viewer ignore el flex y se desborde */
     display: block;
     background-color: rgb(123, 208, 247);
     border: none;
     outline: none;
-    overflow-x: hidden;
 }
- 
+
+
 /* Slider de selección (3 figuras) */
 .slider {
     width: 100%;
