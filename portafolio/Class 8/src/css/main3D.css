@@ -140,16 +140,3 @@ model-viewer {
 .slide:focus { outline: none; }
 .slide:focus-visible { outline: 2px solid #1a7aab; }
  
-/* ==============================
-   RESPONSIVE
-============================== */
-@media (max-width: 600px) {
-    .peanuts-logo {
-        max-width: 280px;
-    }
- 
-    .slide {
-        width: 70px;
-        height: 70px;
-    }
-}
