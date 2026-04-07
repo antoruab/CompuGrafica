@@ -143,3 +143,20 @@ model-viewer {
 .slide:focus { outline: none; }
 .slide:focus-visible { outline: 2px solid #1a7aab; }
  
+#ar-button {
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    bottom: 132px;
+    padding: 0 16px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    color: #1a7aab;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 18px;
+    border: 2px solid #1a7aab;
+    cursor: pointer;
+}

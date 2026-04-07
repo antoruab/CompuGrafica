@@ -16,7 +16,7 @@
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.2.0/model-viewer.min.js"></script>
 
 </head>
- 
+
 <body>
 
     <section id="navbar">
@@ -26,11 +26,11 @@
                     <img src="../../src/img/Icono computador.png" alt="Logo" width="40" class="me-2">
                     Computer Graphics
                 </a>
- 
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
- 
+
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
@@ -41,7 +41,7 @@
                         <li class="nav-item"><a class="nav-link" href="#">Resources</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
                     </ul>
- 
+
                     <div class="d-flex gap-2">
                         <a href="#" class="btn btn-outline-secondary">Log in</a>
                         <a href="#" class="btn btn-secondary">Sign up</a>
@@ -50,22 +50,20 @@
             </div>
         </nav>
     </section>
- 
+
 
     <div class="viewer-container">
- 
+
         <div class="peanuts-header">
             <img src="./src/img/Peanuts logo.svg" alt="Peanuts Logo" class="peanuts-logo">
         </div>
- 
-        <model-viewer
-            id="mainViewer"
-            alt="Snoopy 3D"
-            src="./src/models/glb/Snoopy.glb"
-            shadow-intensity="1"
-            ar
-            camera-controls
-            touch-action="pan-y">
+
+        <model-viewer id="mainViewer" alt="Snoopy 3D" src="./src/models/glb/Snoopy.glb" shadow-intensity="1" ar
+            camera-controls touch-action="pan-y">
+
+            <button slot="ar-button" id="ar-button">
+                View in your space
+            </button>
 
             <div class="slider">
                 <div class="slides">
@@ -80,25 +78,25 @@
                     </button>
                 </div>
             </div>
- 
+
         </model-viewer>
- 
+
     </div>
 
     <script type="module">
         const modelViewer = document.querySelector("model-viewer");
- 
+
         window.switchSrc = (element, name) => {
             modelViewer.src = "./src/models/glb/" + name + ".glb";
             document.querySelectorAll(".slide").forEach(el => el.classList.remove("selected"));
             element.classList.add("selected");
         };
- 
+
         document.querySelector(".slider").addEventListener('beforexrselect', (ev) => {
             ev.preventDefault();
         });
     </script>
- 
+
 </body>
- 
+
 </html>
