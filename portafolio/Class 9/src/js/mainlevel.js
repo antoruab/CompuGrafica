@@ -67,7 +67,7 @@ function onWindowResize() {
 
 // AUDIO play
 window.addEventListener('load', function () {
-    var audio = document.getElementById('miAudio2');
+    var audio = document.getElementById('myAudio2');
     var reproducir = function () {
         audio.play().then(function () {
             document.removeEventListener('click', reproducir);
