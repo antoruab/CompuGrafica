@@ -1,4 +1,4 @@
-document.getElementById('play').addEventListener('click', function (e) {
+document.getElementById('resume').addEventListener('click', function (e) {
     e.preventDefault();
 
     const items = document.querySelectorAll('.main-menu__nav > li');
@@ -10,6 +10,9 @@ document.getElementById('play').addEventListener('click', function (e) {
         }, index * 200);
     });
 });
+
+
+
 
 // AUDIO play
 window.addEventListener('load', function () {
