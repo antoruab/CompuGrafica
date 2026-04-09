@@ -50,3 +50,114 @@
 .custom-navbar .nav-link {
     font-weight: 600;
 }
+
+body {
+    background-color: #333;
+    font-size: 1rem;
+    overflow: hidden;
+}
+
+body,
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: #ddd;
+    transition: 0.2s ease-in;
+}
+
+a:hover {
+    color: #fff;
+}
+
+.main-menu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    transform: translate(-50%, -50%);
+}
+
+.main-menu__nav li~li {
+    margin-top: -1px;
+}
+
+.main-menu__nav a {
+    border: 2px solid #2bc0db;
+    display: block;
+    padding: 10px;
+    text-align: center;
+    color: #2bc0db;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s ease-in;
+}
+
+.main-menu__nav a::after {
+    content: "";
+    display: block;
+    background-color: #fff;
+    width: 20px;
+    height: 200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotate(30deg) translateY(-50%);
+    transform-origin: top center;
+    opacity: 0;
+    animation-duration: 0.2s;
+    animation-timing-function: linear;
+}
+
+.main-menu__nav a::before {
+    content: attr(data-title);
+    color: #fff;
+    display: block;
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 0.3s ease-out;
+    opacity: 0;
+}
+
+.main-menu__nav a:hover {
+    background-color: #2bc0db;
+    color: #fff;
+    text-indent: -500px;
+}
+
+.main-menu__nav a:hover::after {
+    animation-name: blik;
+}
+
+.main-menu__nav a:hover::before {
+    opacity: 1;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes blik {
+    0% {
+        opacity: 0;
+        left: 0;
+    }
+
+    50% {
+        opacity: 0.7;
+        left: 50%;
+    }
+
+    100% {
+        opacity: 0;
+        left: 100%;
+    }
+}
