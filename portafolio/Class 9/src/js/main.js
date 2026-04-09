@@ -1,7 +1,8 @@
-document.getElementById('resume').addEventListener('click', function (e) {
+document.getElementById('play').addEventListener('click', function (e) {
     e.preventDefault();
 
     const items = document.querySelectorAll('.main-menu__nav > li');
+    const destino = this.getAttribute('href'); // guarda el href antes de animar
 
     items.forEach(function (li, index) {
         setTimeout(function () {
@@ -9,24 +10,25 @@ document.getElementById('resume').addEventListener('click', function (e) {
             li.style.transform = 'translateX(1000px)';
         }, index * 200);
     });
+
+    // Navega después de que terminen las animaciones
+    const tiempoTotal = (items.length - 1) * 200 + 300;
+    setTimeout(function () {
+        window.location.href = destino;
+    }, tiempoTotal);
 });
 
-
-
-
-// AUDIO play
+// Audio
 window.addEventListener('load', function () {
-    var audio = document.getElementById('miAudio');
+    var audio = document.getElementById('myAudio'); // ← estaba 'miAudio', el id real es 'myAudio'
     var reproducir = function () {
         audio.play().then(function () {
             document.removeEventListener('click', reproducir);
             document.removeEventListener('keydown', reproducir);
-        }).catch(function (error) {
+        }).catch(function () {
             console.log("Esperando interacción real...");
         });
     };
-
-    // Escuchar clics o teclas (las interacciones que sí valen)
     document.addEventListener('click', reproducir);
     document.addEventListener('keydown', reproducir);
 });
