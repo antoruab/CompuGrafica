@@ -44,7 +44,6 @@ function animate(time) {
 
 // Load Scene //
 const loader = new GLTFLoader();
-// Optional: Provide a DRACOLoader instance to decode compressed mesh data
 
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath( '../src/models/glb' );
@@ -52,7 +51,7 @@ loader.setDRACOLoader( dracoLoader );
 const gltf = await loader.loadAsync( '../src/models/glb/Casita.glb' );
 
 gltf.scene.position.set(0, -2.5, 3.5);
-gltf.scene.rotation.y = Math.PI*1.5; // Rota 180 grados en el eje Y
+gltf.scene.rotation.y = Math.PI*1.5;
 scene.add( gltf.scene );
 
 //////////////////////////////////////////////
@@ -78,7 +77,6 @@ window.addEventListener('load', function () {
         });
     };
 
-    // Escuchar clics o teclas (las interacciones que sí valen)
     document.addEventListener('click', reproducir);
     document.addEventListener('keydown', reproducir);
 });
