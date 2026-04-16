@@ -1,19 +1,16 @@
 const savedVolume = localStorage.getItem('cg_volume') ?? '80';
 const savedSong   = localStorage.getItem('cg_song')   ?? '../src/sounds/intro.mp3';
 
-const audio = document.getElementById('myAudio3'); // ← verifica que este id exista en el HTML
+const audio = document.getElementById('myAudio3');
 
+audio.pause();
+audio.src = savedSong;
 audio.volume = Number(savedVolume) / 100;
-
-if (audio.src !== new URL(savedSong, window.location.href).href) {
-    audio.src = savedSong;
-}
-
+audio.load();
 audio.play().catch(() => {
     const resume = () => { audio.play(); document.removeEventListener('click', resume); };
     document.addEventListener('click', resume);
 });
-
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
