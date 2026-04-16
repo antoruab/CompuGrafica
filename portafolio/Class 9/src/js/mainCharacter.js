@@ -6,24 +6,32 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 const canvas = document.getElementById('charCanvas');
 const wrapper = canvas.parentElement;
 
-// Renderer
 const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(wrapper.clientWidth, wrapper.clientHeight);
-renderer.setClearColor(0x000000, 0); // fondo transparente
+renderer.setClearColor(0x000000, 0);
 
-// Escena y cámara
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(50, wrapper.clientWidth / wrapper.clientHeight, 0.1, 100);
 camera.position.set(0, 1, 5);
 
-// Luces
-scene.add(new THREE.AmbientLight(0xffffff, 1));
-const dirLight = new THREE.DirectionalLight(0xffffff, 1.5);
+// Luces más fuertes
+scene.add(new THREE.AmbientLight(0xffffff, 1.5));
+
+const dirLight = new THREE.DirectionalLight(0xffffff, 2.5);
 dirLight.position.set(3, 5, 5);
 scene.add(dirLight);
 
-// Orbit controls (solo rotación, sin zoom ni pan)
+// Luz de relleno desde la izquierda
+const fillLight = new THREE.DirectionalLight(0xd0c0ff, 1.2);
+fillLight.position.set(-4, 2, 2);
+scene.add(fillLight);
+
+// Luz desde abajo para suavizar sombras
+const bottomLight = new THREE.DirectionalLight(0xffffff, 0.6);
+bottomLight.position.set(0, -3, 2);
+scene.add(bottomLight);
+
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableZoom = false;
 controls.enablePan = false;
@@ -32,27 +40,25 @@ controls.autoRotateSpeed = 2;
 controls.target.set(0, 0.5, 0);
 controls.update();
 
-// Cargar modelo Snoopy
 const loader = new GLTFLoader();
 const draco = new DRACOLoader();
 draco.setDecoderPath('../src/models/glb/');
 loader.setDRACOLoader(draco);
 
 loader.load(
-    '../src/models/glb/Snoopy.glb', // ← ajusta el nombre de tu archivo
+    '../src/models/glb/Snoopy.glb',
     (gltf) => {
         const model = gltf.scene;
 
-        // Centrar el modelo automáticamente
         const box = new THREE.Box3().setFromObject(model);
         const center = box.getCenter(new THREE.Vector3());
         const size = box.getSize(new THREE.Vector3());
         model.position.sub(center);
-        model.position.y += size.y / 2;
+        model.position.y += size.y / -3; // Ajusta la posición vertical para que el modelo esté más centrado
 
-        // Escalar para que quepa bien
+        // Escala más grande: de 2.5 a 4.5
         const maxDim = Math.max(size.x, size.y, size.z);
-        model.scale.setScalar(2.5 / maxDim);
+        model.scale.setScalar(4.5 / maxDim);
 
         scene.add(model);
     },
@@ -60,7 +66,6 @@ loader.load(
     (err) => console.error('Error cargando Snoopy.glb:', err)
 );
 
-// Loop de animación
 function animate() {
     requestAnimationFrame(animate);
     controls.update();
@@ -68,7 +73,6 @@ function animate() {
 }
 animate();
 
-// Responsive
 window.addEventListener('resize', () => {
     const w = wrapper.clientWidth;
     const h = wrapper.clientHeight;
