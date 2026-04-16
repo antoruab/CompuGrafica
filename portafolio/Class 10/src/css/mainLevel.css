@@ -4,7 +4,6 @@
 
 body { margin: 0; }
 
-
 .custom-navbar { background-color: #ecd0ec; }
 
 .custom-navbar .navbar-brand,
@@ -30,6 +29,8 @@ body { margin: 0; }
     background-color: #461d3a;
     color: #fff;
 }
+
+
 
 canvas {
     position: fixed;

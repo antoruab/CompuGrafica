@@ -2,8 +2,24 @@ import * as THREE from 'three';
 import Stats from 'three/addons/libs/stats.module.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-
 import { GUI } from 'lil-gui';
+
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
+import { FlyControls } from 'three/addons/controls/FlyControls.js';
+import { FirstPersonControls } from 'three/addons/controls/FirstPersonControls.js';
+import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
+import { TransformControls } from 'three/addons/controls/TransformControls.js';
+
+const description = {
+    Orbit: 'OrbitControls: Permite rotar alrededor de un punto objetivo, hacer zoom y desplazarse. Es ideal para escenas donde el usuario quiere explorar un objeto o entorno desde diferentes ángulos.',
+    Trackball: 'TrackballControls: Similar a OrbitControls pero con un comportamiento más fluido y natural, como si estuvieras manipulando una bola de cristal. Es excelente para escenas artísticas o donde se desea una interacción más orgánica.',
+    Fly: 'FlyControls: Permite volar a través de la escena como si estuvieras en un avión. Es ideal para simulaciones de vuelo o exploración de grandes entornos 3D.',
+    FirstPerson: 'FirstPersonControls: Simula la perspectiva de un personaje en primera persona, permitiendo caminar y mirar alrededor. Es perfecto para juegos de aventura o simuladores de caminata.',
+    PointerLock: 'PointerLockControls: Similar a FirstPersonControls pero con control total del mouse, bloqueando el cursor en la ventana. Es ideal para juegos de disparos en primera persona o experiencias inmersivas donde se requiere precisión en el control del mouse.',
+    Transform: 'TransformControls: Permite manipular objetos en la escena (mover, rotar, escalar) de manera interactiva. Es útil para editores de escenas o aplicaciones donde el usuario necesita modificar objetos directamente.'
+}
+
 
 const savedVolume  = localStorage.getItem('cg_volume')  ?? '80';
 const savedSong    = localStorage.getItem('cg_song')    ?? '../src/sounds/intro.mp3';
@@ -24,7 +40,7 @@ const timer = new THREE.Timer();
 timer.connect(document);
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(savedBgColor); // usa la variable de arriba
+scene.background = new THREE.Color(savedBgColor);
 
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
@@ -74,6 +90,9 @@ const params = {
   intensity: 2,
   color: '#f0f420',
   positionX: 0,
+  toggleLight: function() {
+      this.enabled = !this.enabled;
+  }
 };
 
 // Crear la carpeta de luz
