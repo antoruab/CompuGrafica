@@ -1,5 +1,20 @@
-const savedBg = localStorage.getItem('cg_bgcolor');
-if (savedBg) scene.background = new THREE.Color(savedBg);
+const savedVolume = localStorage.getItem('cg_volume') ?? '80';
+const savedSong   = localStorage.getItem('cg_song')   ?? '../src/sounds/game.mp3';
+const savedBgColor = localStorage.getItem('cg_bgcolor') ?? '#7BD0F7';
+
+const audio = document.getElementById('myAudio2');
+
+
+audio.volume = Number(savedVolume) / 100;
+
+if (audio.src !== new URL(savedSong, window.location.href).href) {
+    audio.src = savedSong;
+}
+
+audio.play().catch(() => {
+    const resume = () => { audio.play(); document.removeEventListener('click', resume); };
+    document.addEventListener('click', resume);
+});
 
 import * as THREE from 'three';
 import Stats from 'three/addons/libs/stats.module.js';
@@ -13,7 +28,8 @@ const timer = new THREE.Timer();
 timer.connect(document);
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x7BD0F7);
+const savedBg = localStorage.getItem('cg_bgcolor') ?? '#7BD0F7';
+scene.background = new THREE.Color(savedBg);
 
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
@@ -21,6 +37,9 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setAnimationLoop(animate);
 document.body.appendChild(renderer.domElement);
+
+const savedBgColor = localStorage.getItem('cg_bgcolor') ?? '#7BD0F7';
+scene.background = new THREE.Color(savedBgColor);
 
 // Light
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -66,23 +85,4 @@ function onWindowResize() {
 
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
-////////////////////////////////////////
 
-// AUDIO play
-const savedVol = localStorage.getItem('cg_volume');
-if (savedVol) audio.volume = savedVol / 100;
-
-window.addEventListener('load', function () {
-    var audio = document.getElementById('myAudio2');
-    var reproducir = function () {
-        audio.play().then(function () {
-            document.removeEventListener('click', reproducir);
-            document.removeEventListener('keydown', reproducir);
-        }).catch(function (error) {
-            console.log("Esperando interacción real...");
-        });
-    };
-
-    document.addEventListener('click', reproducir);
-    document.addEventListener('keydown', reproducir);
-});

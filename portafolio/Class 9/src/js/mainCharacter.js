@@ -1,3 +1,19 @@
+const savedVolume = localStorage.getItem('cg_volume') ?? '80';
+const savedSong   = localStorage.getItem('cg_song')   ?? '../src/sounds/intro.mp3';
+
+const audio = document.getElementById('myAudio3'); // ← verifica que este id exista en el HTML
+
+audio.volume = Number(savedVolume) / 100;
+
+if (audio.src !== new URL(savedSong, window.location.href).href) {
+    audio.src = savedSong;
+}
+
+audio.play().catch(() => {
+    const resume = () => { audio.play(); document.removeEventListener('click', resume); };
+    document.addEventListener('click', resume);
+});
+
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
@@ -77,23 +93,4 @@ window.addEventListener('resize', () => {
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
     renderer.setSize(w, h);
-});
-
-
-// Audio
-const savedVol = localStorage.getItem('cg_volume');
-if (savedVol) audio.volume = savedVol / 100;
-
-window.addEventListener('load', function () {
-    var audio = document.getElementById('myAudio');
-    var reproducir = function () {
-        audio.play().then(function () {
-            document.removeEventListener('click', reproducir);
-            document.removeEventListener('keydown', reproducir);
-        }).catch(function () {
-            console.log("Esperando interacción real...");
-        });
-    };
-    document.addEventListener('click', reproducir);
-    document.addEventListener('keydown', reproducir);
 });

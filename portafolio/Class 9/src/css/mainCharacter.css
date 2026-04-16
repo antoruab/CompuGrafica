@@ -236,10 +236,9 @@ body {
     align-items: center;
     justify-content: center;
     margin-top: 1.5rem;
-    /* ← agrégale esto, súbelo o bájalo a gusto */
 }
 
-/* ── Grid de personajes (izquierda) ── */
+
 .char-grid-wrapper {
     display: flex;
     flex-direction: column;
@@ -275,16 +274,6 @@ body {
     color: #3a1a3a;
 }
 
-/* Slots bloqueados */
-.char-slot.locked {
-    opacity: 0.5;
-}
-
-.lock-icon {
-    font-size: 24px;
-}
-
-/* ── Detalle del personaje (derecha) ── */
 .char-detail {
     display: flex;
     flex-direction: column;
@@ -301,7 +290,6 @@ body {
     text-shadow: 0 2px 6px rgba(255, 255, 255, 0.5);
 }
 
-/* Canvas Three.js */
 .char-canvas-wrapper {
     width: 100%;
     height: 220px;
@@ -318,7 +306,6 @@ body {
     display: block;
 }
 
-/* ── Stats ── */
 .char-stats {
     width: 100%;
     background: rgba(255, 255, 255, 0.3);
@@ -367,7 +354,6 @@ body {
     text-align: right;
 }
 
-/* ── Botón seleccionar ── */
 .btn-select {
     margin-top: 0.4rem;
     padding: 10px 32px;
@@ -389,7 +375,7 @@ body {
     transform: scale(1.04);
 }
 
-/* Imagen dentro del slot */
+
 .char-slot-img {
     width: 64px;
     height: 64px;
@@ -398,7 +384,6 @@ body {
     margin-bottom: 4px;
 }
 
-/* El slot con imagen reduce el label */
 .char-slot .char-slot-label {
     font-size: 10px;
 }
