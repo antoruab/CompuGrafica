@@ -1,0 +1,308 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+* { font-family: "Montserrat", sans-serif; box-sizing: border-box; }
+
+body { margin: 0; padding: 0; overflow: hidden; height: 100vh; }
+
+/* ── Navbar (igual que siempre) ── */
+.custom-navbar { background-color: #ecd0ec; }
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link   { color: #461d3a; }
+.custom-navbar .nav-link:hover { color: #2d0f24; }
+.custom-navbar .navbar-brand { font-weight: 700; }
+.custom-navbar .nav-link     { font-weight: 600; }
+.custom-navbar .btn          { font-weight: 400; }
+.custom-navbar .btn-secondary { background-color: #461d3a; border-color: #461d3a; }
+.custom-navbar .btn-outline-secondary { color: #461d3a; border-color: #461d3a; }
+.custom-navbar .btn-outline-secondary:hover { background-color: #461d3a; color: #fff; }
+
+/* ── Fondo animado pastel ── */
+:root {
+    --color-bg1: rgb(220, 180, 230);
+    --color-bg2: rgb(180, 210, 240);
+    --color1: 200, 160, 240;
+    --color2: 240, 180, 210;
+    --color3: 160, 220, 240;
+    --color4: 240, 200, 160;
+    --color5: 200, 240, 200;
+    --color-interactive: 220, 180, 255;
+    --circle-size: 80%;
+    --blending: hard-light;
+}
+
+@keyframes moveInCircle {
+    0%   { transform: rotate(0deg); }
+    50%  { transform: rotate(180deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes moveVertical {
+    0%   { transform: translateY(-50%); }
+    50%  { transform: translateY(50%); }
+    100% { transform: translateY(-50%); }
+}
+@keyframes moveHorizontal {
+    0%   { transform: translateX(-50%) translateY(-10%); }
+    50%  { transform: translateX(50%) translateY(10%); }
+    100% { transform: translateX(-50%) translateY(-10%); }
+}
+
+.gradient-bg {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0; left: 0;
+    overflow: hidden;
+    background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
+    z-index: 0;
+}
+.gradient-bg svg { position: fixed; top: 0; left: 0; width: 0; height: 0; }
+.gradients-container { filter: url(#goo) blur(40px); width: 100%; height: 100%; }
+
+.g1 {
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%) no-repeat;
+    mix-blend-mode: var(--blending);
+    width: var(--circle-size); height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2);
+    left: calc(50% - var(--circle-size) / 2);
+    transform-origin: center center;
+    animation: moveVertical 30s ease infinite;
+}
+.g2 {
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%) no-repeat;
+    mix-blend-mode: var(--blending);
+    width: var(--circle-size); height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2);
+    left: calc(50% - var(--circle-size) / 2);
+    transform-origin: calc(50% - 400px);
+    animation: moveInCircle 20s reverse infinite;
+}
+.g3 {
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color3), 0.8) 0, rgba(var(--color3), 0) 50%) no-repeat;
+    mix-blend-mode: var(--blending);
+    width: var(--circle-size); height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2 + 200px);
+    left: calc(50% - var(--circle-size) / 2 - 500px);
+    transform-origin: calc(50% + 400px);
+    animation: moveInCircle 40s linear infinite;
+}
+.g4 {
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color4), 0.8) 0, rgba(var(--color4), 0) 50%) no-repeat;
+    mix-blend-mode: var(--blending);
+    width: var(--circle-size); height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2);
+    left: calc(50% - var(--circle-size) / 2);
+    transform-origin: calc(50% - 200px);
+    animation: moveHorizontal 40s ease infinite;
+    opacity: 0.7;
+}
+.g5 {
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color5), 0.8) 0, rgba(var(--color5), 0) 50%) no-repeat;
+    mix-blend-mode: var(--blending);
+    width: calc(var(--circle-size) * 2); height: calc(var(--circle-size) * 2);
+    top: calc(50% - var(--circle-size));
+    left: calc(50% - var(--circle-size));
+    transform-origin: calc(50% - 800px) calc(50% + 200px);
+    animation: moveInCircle 20s ease infinite;
+}
+.interactive {
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color-interactive), 0.8) 0, rgba(var(--color-interactive), 0) 50%) no-repeat;
+    mix-blend-mode: var(--blending);
+    width: 100%; height: 100%;
+    top: -50%; left: -50%;
+    opacity: 0.7;
+}
+
+/* ── Pantalla principal ── */
+.char-screen {
+    position: relative;
+    z-index: 10;
+    height: calc(100vh - 56px);
+    margin-top: 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 2rem;
+    overflow: hidden;
+}
+
+.char-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #3a1a3a;
+    text-shadow: 0 2px 8px rgba(255,255,255,0.6);
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.char-layout {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+    max-width: 900px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* ── Grid de personajes (izquierda) ── */
+.char-grid-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.char-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 10px;
+}
+
+.char-slot {
+    width: 100px;
+    height: 100px;
+    border-radius: 12px;
+    border: 3px solid rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(6px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+    transition: transform 0.2s;
+}
+
+/* Slot activo (Snoopy) */
+.char-slot.active {
+    border-color: #9b59b6;
+    background: rgba(180,140,220,0.35);
+    box-shadow: 0 0 16px rgba(155,89,182,0.4);
+}
+
+.char-slot-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #3a1a3a;
+}
+
+/* Slots bloqueados */
+.char-slot.locked {
+    opacity: 0.5;
+}
+
+.lock-icon {
+    font-size: 24px;
+}
+
+/* ── Detalle del personaje (derecha) ── */
+.char-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    flex: 1;
+    max-width: 420px;
+}
+
+.char-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #3a1a3a;
+    text-shadow: 0 2px 6px rgba(255,255,255,0.5);
+}
+
+/* Canvas Three.js */
+.char-canvas-wrapper {
+    width: 100%;
+    height: 220px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    border: 2px solid rgba(255,255,255,0.5);
+}
+
+#charCanvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
+
+/* ── Stats ── */
+.char-stats {
+    width: 100%;
+    background: rgba(255,255,255,0.3);
+    backdrop-filter: blur(8px);
+    border-radius: 14px;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    padding: 0.8rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stat-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #3a1a3a;
+    width: 115px;
+    flex-shrink: 0;
+}
+
+.stat-bar-bg {
+    flex: 1;
+    height: 10px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.stat-bar {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.8s ease;
+}
+
+.stat-val {
+    font-size: 12px;
+    font-weight: 700;
+    color: #3a1a3a;
+    width: 28px;
+    text-align: right;
+}
+
+/* ── Botón seleccionar ── */
+.btn-select {
+    margin-top: 0.4rem;
+    padding: 10px 32px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: rgba(90, 40, 90, 0.75);
+    color: #fff;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.15s;
+    backdrop-filter: blur(4px);
+}
+
+.btn-select:hover {
+    background: rgba(90, 40, 90, 0.95);
+    transform: scale(1.04);
+}
