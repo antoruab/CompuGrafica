@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Select</title>
+    <link rel="icon" type="image/png" href="../../../src/img/Icono computador.png">
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.183.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.183.0/examples/jsm/"
+      }
+    }
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../src/css/mainCharacter.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg custom-navbar fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="../../index.html">
+                <img src="../../../src/img/Icono computador.png" alt="Logo" width="40" class="me-2">
+                Computer Graphics
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Units</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">GitHub</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Teacher support</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Forum and activities</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Resources</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+                <div class="d-flex gap-2">
+                    <a href="#" class="btn btn-outline-secondary">Log in</a>
+                    <a href="#" class="btn btn-secondary">Sign up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="gradient-bg">
+        <svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="goo">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"
+                        result="goo" />
+                    <feBlend in="SourceGraphic" in2="goo" />
+                </filter>
+            </defs>
+        </svg>
+        <div class="gradients-container">
+            <div class="g1"></div>
+            <div class="g2"></div>
+            <div class="g3"></div>
+            <div class="g4"></div>
+            <div class="g5"></div>
+            <div class="interactive"></div>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="char-screen">
+        <h1 class="char-title">Character Select</h1>
+
+        <div class="char-layout">
+
+            <!-- Izquierda: grid de personajes -->
+            <div class="char-grid-wrapper">
+                <div class="char-grid">
+
+                    <!-- Personaje 1 -->
+                    <div class="char-slot">
+                        <img src="../src/img/Charlie.jpg" alt="Char 1" class="char-slot-img">
+                        <span class="char-slot-label">Charlie</span>
+                    </div>
+
+                    <!-- Personaje 2 -->
+                    <div class="char-slot">
+                        <img src="../src/img/Linus.jpg" alt="Char 2" class="char-slot-img">
+                        <span class="char-slot-label">Linus</span>
+                    </div>
+
+                    <!-- Personaje 3 -->
+                    <div class="char-slot">
+                        <img src="../src/img/Lucy.jpg" alt="Char 3" class="char-slot-img">
+                        <span class="char-slot-label">Lucy</span>
+                    </div>
+
+                    <!-- Personaje 4 -->
+                    <div class="char-slot">
+                        <img src="../src/img/Patty.jpg" alt="Char 4" class="char-slot-img">
+                        <span class="char-slot-label">Patty</span>
+                    </div>
+
+                    <!-- Personaje 5 -->
+                    <div class="char-slot">
+                        <img src="../src/img/Sally.jpg" alt="Char 5" class="char-slot-img">
+                        <span class="char-slot-label">Sally</span>
+                    </div>
+
+                    <!-- Personaje 6 -->
+                    <div class="char-slot">
+                        <img src="../src/img/Woodstock.jpg" alt="Char 6" class="char-slot-img">
+                        <span class="char-slot-label">Woodstock</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="char-detail">
+                <div class="char-name">Snoopy</div>
+
+                <div class="char-canvas-wrapper">
+                    <canvas id="charCanvas"></canvas>
+                </div>
+
+                <div class="char-stats">
+                    <div class="stat-row">
+                        <span class="stat-label">Inteligencia</span>
+                        <div class="stat-bar-bg">
+                            <div class="stat-bar" style="width: 85%; background: #3ab7e8;"></div>
+                        </div>
+                        <span class="stat-val">85</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Fuerza</span>
+                        <div class="stat-bar-bg">
+                            <div class="stat-bar" style="width: 55%; background: #e8608a;"></div>
+                        </div>
+                        <span class="stat-val">55</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Ternura</span>
+                        <div class="stat-bar-bg">
+                            <div class="stat-bar" style="width: 95%; background: #a855f7;"></div>
+                        </div>
+                        <span class="stat-val">95</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Creatividad</span>
+                        <div class="stat-bar-bg">
+                            <div class="stat-bar" style="width: 90%; background: #22c55e;"></div>
+                        </div>
+                        <span class="stat-val">90</span>
+                    </div>
+                </div>
+
+                <button class="btn-select">Seleccionar personaje</button>
+            </div>
+
+        </div>
+    </div>
+
+    <audio loop autoplay id="myAudio3">
+        <source src="../src/sounds/intro.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../src/js/mainCharacter.js"></script>
+</body>
+
+</html>
