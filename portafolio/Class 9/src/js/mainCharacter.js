@@ -15,19 +15,18 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(50, wrapper.clientWidth / wrapper.clientHeight, 0.1, 100);
 camera.position.set(0, 1, 5);
 
-// Luces más fuertes
+
 scene.add(new THREE.AmbientLight(0xffffff, 1.5));
 
 const dirLight = new THREE.DirectionalLight(0xffffff, 2.5);
 dirLight.position.set(3, 5, 5);
 scene.add(dirLight);
 
-// Luz de relleno desde la izquierda
+
 const fillLight = new THREE.DirectionalLight(0xd0c0ff, 1.2);
 fillLight.position.set(-4, 2, 2);
 scene.add(fillLight);
 
-// Luz desde abajo para suavizar sombras
 const bottomLight = new THREE.DirectionalLight(0xffffff, 0.6);
 bottomLight.position.set(0, -3, 2);
 scene.add(bottomLight);
@@ -54,9 +53,8 @@ loader.load(
         const center = box.getCenter(new THREE.Vector3());
         const size = box.getSize(new THREE.Vector3());
         model.position.sub(center);
-        model.position.y += size.y / -3; // Ajusta la posición vertical para que el modelo esté más centrado
-
-        // Escala más grande: de 2.5 a 4.5
+        model.position.y += size.y / -3; 
+       
         const maxDim = Math.max(size.x, size.y, size.z);
         model.scale.setScalar(4.5 / maxDim);
 
@@ -79,4 +77,23 @@ window.addEventListener('resize', () => {
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
     renderer.setSize(w, h);
+});
+
+
+// Audio
+const savedVol = localStorage.getItem('cg_volume');
+if (savedVol) audio.volume = savedVol / 100;
+
+window.addEventListener('load', function () {
+    var audio = document.getElementById('myAudio');
+    var reproducir = function () {
+        audio.play().then(function () {
+            document.removeEventListener('click', reproducir);
+            document.removeEventListener('keydown', reproducir);
+        }).catch(function () {
+            console.log("Esperando interacción real...");
+        });
+    };
+    document.addEventListener('click', reproducir);
+    document.addEventListener('keydown', reproducir);
 });

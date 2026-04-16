@@ -1,3 +1,6 @@
+const savedBg = localStorage.getItem('cg_bgcolor');
+if (savedBg) scene.background = new THREE.Color(savedBg);
+
 import * as THREE from 'three';
 import Stats from 'three/addons/libs/stats.module.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
@@ -66,6 +69,9 @@ function onWindowResize() {
 ////////////////////////////////////////
 
 // AUDIO play
+const savedVol = localStorage.getItem('cg_volume');
+if (savedVol) audio.volume = savedVol / 100;
+
 window.addEventListener('load', function () {
     var audio = document.getElementById('myAudio2');
     var reproducir = function () {
