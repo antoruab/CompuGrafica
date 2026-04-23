@@ -27,14 +27,14 @@ audio.play().catch(() => {
     document.addEventListener('click', resume);
 });
 
+// Stats
 const timer = new THREE.Timer();
 timer.connect(document);
 
+// Scene, camara y renderer
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(savedBgColor);
-
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setAnimationLoop(animate);
@@ -42,6 +42,13 @@ document.body.appendChild(renderer.domElement);
 
 camera.position.z = 8;
 camera.position.y = -1;
+
+// OBjeto principal que vamos a modificar en las transformaciones
+const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
+const boxMaterial = new THREE.MeshBasicMaterial({ color: 0xff0055 });
+const box = new THREE.Mesh(boxGeometry, boxMaterial);
+scene.add(box);
+
 
 const stats = new Stats();
 stats.domElement.style.position = 'absolute';
@@ -78,17 +85,24 @@ function animate() {
     renderer.render(scene, camera);
 }
 
+// UI
+const titleElement = document.getElementById('control-title');
+const descElement = document.getElementById('control-desc');
+
 function setControls(key) {
     // Lógica para establecer los controles
-    alert(`Cambiando a ${key} Controls`);
+    // alert(`Cambiando a ${key} Controls`);
+
+    titleElement.textContent = `${key} Controls`;
+    descElement.textContent = description[key] || 'Descripción no disponible.';
 }
+
 
 // Load Scene
 const loader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath('../src/models/glb');
 loader.setDRACOLoader(dracoLoader);
-
 const gltf = await loader.loadAsync('../src/models/glb/Casita.glb');
 gltf.scene.position.set(0, -2.5, 3.5);
 gltf.scene.rotation.y = Math.PI * 1.5;
@@ -107,8 +121,8 @@ const gui = new GUI();
 const params = {
     lightType: 'Hemisphere',
     enabled: true,
-    intensity: 2,
-    color: '#f0f420',
+    intensity: 1,
+    color: '#ffffff',
     positionX: 0,
     toggleLight: function () {
         this.enabled = !this.enabled;
