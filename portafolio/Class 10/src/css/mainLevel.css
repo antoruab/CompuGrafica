@@ -76,12 +76,6 @@ body {
     line-height: 1.4;
 }
 
-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-}
 
 #instructions {
     position: absolute;
@@ -96,4 +90,12 @@ canvas {
     pointer-events: none;
     text-align: center;
     display: none; /* Se muestra solo en modo PointerLock */
+}
+
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
 }

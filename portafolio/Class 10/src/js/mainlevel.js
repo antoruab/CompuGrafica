@@ -4,14 +4,16 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { GUI } from 'lil-gui';
 
+//Controls
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
 import { FlyControls } from 'three/addons/controls/FlyControls.js';
 import { FirstPersonControls } from 'three/addons/controls/FirstPersonControls.js';
 import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
+import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
 import { TransformControls } from 'three/addons/controls/TransformControls.js';
 
 
+//Audio
 const savedVolume = localStorage.getItem('cg_volume') ?? '80';
 const savedSong = localStorage.getItem('cg_song') ?? '../src/sounds/intro.mp3';
 const savedBgColor = localStorage.getItem('cg_bgcolor') ?? '#7BD0F7';
@@ -67,21 +69,21 @@ document.body.appendChild(stats.domElement);
 
 // Descriptions
 const description = {
-    Orbit: 'Permite rotar alrededor de un punto objetivo, hacer zoom y desplazarse. Es ideal para escenas donde el usuario quiere explorar un objeto o entorno desde diferentes ángulos.',
-    Trackball: 'Similar a OrbitControls pero con un comportamiento más fluido y natural, como si estuvieras manipulando una bola de cristal. Es excelente para escenas artísticas o donde se desea una interacción más orgánica.',
-    Fly: 'Permite volar a través de la escena como si estuvieras en un avión. Es ideal para simulaciones de vuelo o exploración de grandes entornos 3D.',
-    FirstPerson: 'Simula la perspectiva de un personaje en primera persona, permitiendo caminar y mirar alrededor. Es perfecto para juegos de aventura o simuladores de caminata.',
-    PointerLock: 'Similar a FirstPersonControls pero con control total del mouse, bloqueando el cursor en la ventana. Es ideal para juegos de disparos en primera persona o experiencias inmersivas donde se requiere precisión en el control del mouse.',
-    Transform: 'Permite manipular objetos en la escena (mover, rotar, escalar) de manera interactiva. Es útil para editores de escenas o aplicaciones donde el usuario necesita modificar objetos directamente.'
+    Orbit: 'Permite rotar alrededor de un punto objetivo, hacer zoom y desplazarse. Es ideal para visualizar modelos 3D.',
+    Fly: 'Permite volar a través de la escena con movimientos suaves. Es ideal para simulaciones de vuelo o exploración en primera persona.',
+    FirstPerson: 'Simula el movimiento de un personaje en primera persona, permitiendo caminar y mirar alrededor. Es perfecto para juegos o experiencias inmersivas.',
+    PointerLock: 'Similar a FirstPersonControls pero requiere que el usuario haga clic para bloquear el cursor, proporcionando una experiencia de control total. Es ideal para juegos en primera persona.',
+    Trackball: 'Similar a OrbitControls pero con una sensación de control más fluida, como si estuvieras manipulando una bola de control. Es excelente para exploración libre.',
+    Transform: 'Permite manipular objetos en la escena (mover, rotar, escalar) de manera interactiva. Es útil para editores de escenas o herramientas de diseño.'
 }
 
 // configuraciones iniciales para los controles
 const controlMap = {
     Orbit: new OrbitControls(camera, renderer.domElement),
-    Trackball: new TrackballControls(camera, renderer.domElement),
     Fly: new FlyControls(camera, renderer.domElement),
     FirstPerson: new FirstPersonControls(camera, renderer.domElement),
     PointerLock: new PointerLockControls(camera, document.body),
+    Trackball: new TrackballControls(camera, renderer.domElement),
     Transform: new TransformControls(camera, renderer.domElement)
 };
 
@@ -98,12 +100,14 @@ let activeControl = 'Orbit'; // Control activo por defecto
 const titleElement = document.getElementById('control-title');
 const descElement = document.getElementById('control-desc');
 
+
 function setControls(key) {
 
     // Apagar todos los controles
     Object.keys(controlMap).forEach(controlKey => {
         const control = controlMap[controlKey];
         if (control.enabled !== undefined) control.enabled = false; // Para controles que tienen enabled
+
         if (controlKey === 'Transform') scene.remove(control.getHelper()); // Para TransformControls, lo removemos de la escena (removemos el helper que es lo que se ve)
     });
 
@@ -132,6 +136,19 @@ function setControls(key) {
 
     // Lógica para establecer los controles
     // alert(`Cambiando a ${key} Controls`);
+
+    // Lógica del movimiento Pointer Lock (PointerLockControls)
+    const keys = { w: false, a: false, s: false, d: false };
+    const velocity = new THREE.Vector3();
+    const direction = new THREE.Vector3();
+
+    window.addEventListener('keydown', (event) => {
+        if (keys.hasOwnProperty(event.key.toLowerCase())) keys[event.key.toLowerCase()] = true;
+    });
+    window.addEventListener('keyup', (event) => {
+        if (keys.hasOwnProperty(event.key.toLowerCase())) keys[event.key.toLowerCase()] = false;
+    });
+
 }
 
 
@@ -145,13 +162,8 @@ gltf.scene.position.set(0, -2.5, 3.5);
 gltf.scene.rotation.y = Math.PI * 1.5;
 scene.add(gltf.scene);
 
-window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-});
 
-
+// GUI
 const gui = new GUI();
 
 // Parámteros iniciales para controlar la luz
@@ -236,6 +248,23 @@ function animate() {
     if (activeControl === 'FirstPerson') controlMap.FirstPerson.update(delta);
 
     // PointerLockControls no necesita actualización en el loop, se maneja con eventos de mouse
+    //Movimiento manual para PointerLockControls
+
+    if (activeControl === 'PointerLock' && controlMap.PointerLock.isLocked) {
+        velocity.x -= velocity.x * 10.0 * delta;
+        velocity.z -= velocity.z * 10.0 * delta;
+
+        direction.z = Number(keys.w) - Number(keys.s);
+        direction.x = Number(keys.d) - Number(keys.a);
+        direction.normalize(); // Esto asegura que la dirección tenga una longitud de 1
+
+        if (keys.w || keys.s) velocity.z -= direction.z * 400.0 * delta;
+        if (keys.a || keys.d) velocity.x -= direction.x * 400.0 * delta;
+
+        controlMap.PointerLock.moveRight(-velocity.x * delta);
+        controlMap.PointerLock.moveForward(-velocity.z * delta);
+    }
+
     renderer.render(scene, camera);
 }
 
