@@ -27,14 +27,14 @@ audio.play().catch(() => {
     document.addEventListener('click', resume);
 });
 
-// Stats
-const timer = new THREE.Timer();
-timer.connect(document);
 
 // Scene, camara y renderer
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(savedBgColor);
+scene.fog = new THREE.Fog(0x111111, 1, 5);
+
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setAnimationLoop(animate);
@@ -43,27 +43,39 @@ document.body.appendChild(renderer.domElement);
 camera.position.z = 8;
 camera.position.y = -1;
 
-// OBjeto principal que vamos a modificar en las transformaciones
-const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
-const boxMaterial = new THREE.MeshBasicMaterial({ color: 0xff0055 });
-const box = new THREE.Mesh(boxGeometry, boxMaterial);
-scene.add(box);
 
+// Objeto principal que vamos a modificar en las transformaciones
+const boxMesh = new THREE.Mesh(
+    new THREE.BoxGeometry(0.5, 0.5, 0.5),
+    new THREE.MeshStandardMaterial({ color: 0xff0055 })
+);
+boxMesh.position.set(0, -2.2, 5);
+scene.add(boxMesh);
+
+
+
+// Stats
+const timer = new THREE.Timer();
+timer.connect(document);
 
 const stats = new Stats();
 stats.domElement.style.position = 'absolute';
 stats.domElement.style.top = '0px';
 document.body.appendChild(stats.domElement);
 
+
+
+// Descriptions
 const description = {
-    Orbit: 'OrbitControls: Permite rotar alrededor de un punto objetivo, hacer zoom y desplazarse. Es ideal para escenas donde el usuario quiere explorar un objeto o entorno desde diferentes ángulos.',
-    Trackball: 'TrackballControls: Similar a OrbitControls pero con un comportamiento más fluido y natural, como si estuvieras manipulando una bola de cristal. Es excelente para escenas artísticas o donde se desea una interacción más orgánica.',
-    Fly: 'FlyControls: Permite volar a través de la escena como si estuvieras en un avión. Es ideal para simulaciones de vuelo o exploración de grandes entornos 3D.',
-    FirstPerson: 'FirstPersonControls: Simula la perspectiva de un personaje en primera persona, permitiendo caminar y mirar alrededor. Es perfecto para juegos de aventura o simuladores de caminata.',
-    PointerLock: 'PointerLockControls: Similar a FirstPersonControls pero con control total del mouse, bloqueando el cursor en la ventana. Es ideal para juegos de disparos en primera persona o experiencias inmersivas donde se requiere precisión en el control del mouse.',
-    Transform: 'TransformControls: Permite manipular objetos en la escena (mover, rotar, escalar) de manera interactiva. Es útil para editores de escenas o aplicaciones donde el usuario necesita modificar objetos directamente.'
+    Orbit: 'Permite rotar alrededor de un punto objetivo, hacer zoom y desplazarse. Es ideal para escenas donde el usuario quiere explorar un objeto o entorno desde diferentes ángulos.',
+    Trackball: 'Similar a OrbitControls pero con un comportamiento más fluido y natural, como si estuvieras manipulando una bola de cristal. Es excelente para escenas artísticas o donde se desea una interacción más orgánica.',
+    Fly: 'Permite volar a través de la escena como si estuvieras en un avión. Es ideal para simulaciones de vuelo o exploración de grandes entornos 3D.',
+    FirstPerson: 'Simula la perspectiva de un personaje en primera persona, permitiendo caminar y mirar alrededor. Es perfecto para juegos de aventura o simuladores de caminata.',
+    PointerLock: 'Similar a FirstPersonControls pero con control total del mouse, bloqueando el cursor en la ventana. Es ideal para juegos de disparos en primera persona o experiencias inmersivas donde se requiere precisión en el control del mouse.',
+    Transform: 'Permite manipular objetos en la escena (mover, rotar, escalar) de manera interactiva. Es útil para editores de escenas o aplicaciones donde el usuario necesita modificar objetos directamente.'
 }
 
+// configuraciones iniciales para los controles
 const controlMap = {
     Orbit: new OrbitControls(camera, renderer.domElement),
     Trackball: new TrackballControls(camera, renderer.domElement),
@@ -73,32 +85,57 @@ const controlMap = {
     Transform: new TransformControls(camera, renderer.domElement)
 };
 
-// Configuración inicial de controles
+// Configuración específica de los controles
 controlMap.Fly.movementSpeed = 5;
 controlMap.Fly.rollSpeed = Math.PI / 24;
 controlMap.FirstPerson.movementSpeed = 5;
 controlMap.FirstPerson.lookSpeed = 0.1;
+controlMap.Transform.attach(boxMesh); //Asociamos el TransformControls al objeto boxMesh
 
-function animate() {
-    timer.update();
-    stats.update();
-    renderer.render(scene, camera);
-}
 
-// UI
+// Gestion de interfaz y cambio de controls
+let activeControl = 'Orbit'; // Control activo por defecto
 const titleElement = document.getElementById('control-title');
 const descElement = document.getElementById('control-desc');
 
 function setControls(key) {
-    // Lógica para establecer los controles
-    // alert(`Cambiando a ${key} Controls`);
 
+    // Apagar todos los controles
+    Object.keys(controlMap).forEach(controlKey => {
+        const control = controlMap[controlKey];
+        if (control.enabled !== undefined) control.enabled = false; // Para controles que tienen enabled
+        if (controlKey === 'Transform') scene.remove(control.getHelper()); // Para TransformControls, lo removemos de la escena (removemos el helper que es lo que se ve)
+    });
+
+    activeControl = key;
+    const active = controlMap[key];
+
+    // PANTALLA DE INSTRUCCIONES (instruccionDIV) ** Pendiente
+
+    // Cambiamos el texto del título y la descripción (Inferior izquierda)
     titleElement.textContent = `${key} Controls`;
     descElement.textContent = description[key] || 'Descripción no disponible.';
+
+    // Logica para activar el control seleccionado
+    if (key === 'Transform') {
+        scene.add(active.getHelper());
+        active.enabled = true;
+        controlMap.Orbit.enabled = false;
+    } else if (key === 'PointerLock') {
+        // No se activa automáticamente, el usuario debe hacer clic para bloquear el cursor
+    } else {
+        if (active.enabled !== undefined) active.enabled = true; // Activamos el control seleccionado    
+    }
+
+    // Para la opcion de firstperson debemos capturar el pointer lock
+
+
+    // Lógica para establecer los controles
+    // alert(`Cambiando a ${key} Controls`);
 }
 
 
-// Load Scene
+// Load 3D model
 const loader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath('../src/models/glb');
@@ -181,5 +218,35 @@ cameraFolder2.add(camera.rotation, 'z', 0, Math.PI * 2).name('Rotation Z');
 cameraFolder2.close();
 
 const cameraFolder3 = gui.addFolder('Camera Controls');
-cameraFolder3.add({ Script: 'Orbit' }, 'Script', ['Orbit', 'Trackball', 'Fly', 'FirstPerson', 'PointerLock']).onChange(setControls);
+cameraFolder3.add({ Script: 'Orbit' }, 'Script', ['Orbit', 'Trackball', 'Fly', 'FirstPerson', 'PointerLock', 'Transform']).onChange(setControls);
 cameraFolder3.open();
+
+//Animate
+function animate() {
+
+    timer.update();
+    stats.update();
+
+    const delta = timer.getDelta();
+
+    // Actualizamos los controles activos
+    if (activeControl === 'Orbit') controlMap.Orbit.update();
+    if (activeControl === 'Trackball') controlMap.Trackball.update();
+    if (activeControl === 'Fly') controlMap.Fly.update(delta); // El valor es el delta time, ajusta según sea necesario
+    if (activeControl === 'FirstPerson') controlMap.FirstPerson.update(delta);
+
+    // PointerLockControls no necesita actualización en el loop, se maneja con eventos de mouse
+    renderer.render(scene, camera);
+}
+
+
+window.addEventListener('resize', onWindowResize, false);
+
+function onWindowResize() {
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+}
