@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Computer Graphics - Parcial</title>
+    <link rel="icon" href="../src/img/Icono computador.png">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/navbar.css">
+
+    <script src="./src/libs/jquery-1.11.1.js"></script>
+    <script src="./src/libs/three.js"></script>
+    <script src="./src/libs/DAT.GUI.min.js"></script>
+    <script src="./src/libs/Stats.js"></script>
+    <script src="./vendors/three.js-master/build/three.min.js"></script>
+    <script src="./vendors/controls/OrbitControls.js"></script>
+    <script src="./vendors/load/DRACOLoader.js"></script>
+    <script src="./vendors/load/GLTFLoader.js"></script>
+    <script src="./vendors/load/OBJLoader.js"></script>
+    <script src="./vendors/load/MTLLoader.js"></script>
+    <script src="./vendors/controls/FirstPersonControls.js"></script>
+    <script src="./vendors/controls/PointerLockControls.js"></script>
+    <script src="./src/mov/FPSControls.js"></script>
+    <script src="./src/mov/pointerlock.js"></script>
+    <script src="./src/Sound.js"></script>
+    <script src="./src/main.js"></script>
+</head>
+
+<body onload="start()">
+    <canvas id="app"></canvas>
+
+    <section id="navbar">
+        <nav class="navbar navbar-expand-lg custom-navbar">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" href="../../index.html">
+                    <img src="../../src/img/Icono computador.png" alt="Logo" width="40" class="me-2">
+                    Computer Graphics
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Units</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">GitHub</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Teacher support</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Forum and activities</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Resources</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    </ul>
+                    <div class="d-flex gap-2">
+                        <a href="#" class="btn btn-outline-secondary">Log in</a>
+                        <a href="#" class="btn btn-secondary">Sign up</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </section>
+
+    <div id="blocker">
+        <div id="instructions">
+            <span onclick="go2Play()" style="font-size:36px">Click to play</span>
+            <br /><br />
+            Move: WASD<br />
+            Jump: SPACE<br />
+            Look: MOUSE
+        </div>
+    </div>
+
+    <!-- Game Over: clic en cualquier lado reinicia -->
+    <div id="lost" style="display:none; position:absolute; width:100%; height:100%;
+     background-image:url('../img/gameOver.jpg'); background-size:cover;
+     background-position:center; z-index:5; cursor:pointer;" onclick="location.reload()">
+    </div>
+    <!-- HUD -->
+    <div id="cointainerOthers" style="display: none;">
+
+        <!-- Timer centrado arriba -->
+        <div id="timer" style="position:absolute; top:70px; width:100%; text-align:center; z-index:5;">
+            <span class="timertext" style="font-size:20px;" id="minutes">00</span>
+            <span class="timertext" style="font-size:20px;" id="break">:</span>
+            <span class="timertext" style="font-size:20px;" id="seconds">00</span>
+        </div>
+
+        <!-- Corazones solos arriba a la izquierda -->
+        <div style="position:absolute; top:70px; left:20px; z-index:5;">
+            <span id="lives"></span>
+        </div>
+
+        <!-- Duck Attack y Deshacer arriba a la derecha -->
+        <div style="position:absolute; top:80px; right:20px; z-index:5; display:flex; flex-direction:column; gap:8px;">
+            <button onclick="duckAttack()" style="font-size:18px; padding:8px 18px; background-color:#f4511e; 
+             color:white; border:none; border-radius:10px; cursor:pointer;">
+                🦆 Duck Attack!
+            </button>
+            <button onclick="undoDuckAttack()" style="font-size:18px; padding:8px 18px; background-color:#555; 
+             color:white; border:none; border-radius:10px; cursor:pointer;">
+                ↩️ Deshacer
+            </button>
+        </div>
+
+    </div>
+
+
+
+    <audio id="myAudio" src="../CodigoParcial2026/songs/backgroundSound.mp3" loop></audio>
+    <audio id="endGame"></audio>
+    <script>
+        var x = document.getElementById("myAudio");
+        var y = document.getElementById("endGame");
+        function playAudio(k) { k.volume = 0.5; k.play(); }
+        function pauseAudio(k) { k.pause(); } 
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
