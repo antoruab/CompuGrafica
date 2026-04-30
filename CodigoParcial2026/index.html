@@ -74,41 +74,40 @@
         </div>
     </div>
 
-    <!-- Game Over: clic en cualquier lado reinicia -->
-    <div id="lost" style="display:none; position:absolute; width:100%; height:100%;
-     background-image:url('../img/gameOver.jpg'); background-size:cover;
-     background-position:center; z-index:5; cursor:pointer;" onclick="location.reload()">
+    <div id="lost" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+    background-image:url('./img/gameOver.jpg'); background-size:cover;
+    background-position:center; z-index:999; cursor:pointer;" onclick="location.reload()">
     </div>
+
+
     <!-- HUD -->
     <div id="cointainerOthers" style="display: none;">
 
-        <!-- Timer centrado arriba -->
+
         <div id="timer" style="position:absolute; top:70px; width:100%; text-align:center; z-index:5;">
             <span class="timertext" style="font-size:20px;" id="minutes">00</span>
             <span class="timertext" style="font-size:20px;" id="break">:</span>
             <span class="timertext" style="font-size:20px;" id="seconds">00</span>
         </div>
 
-        <!-- Corazones solos arriba a la izquierda -->
+
         <div style="position:absolute; top:70px; left:20px; z-index:5;">
-            <span id="lives"></span>
+            <span id="lives" style="font-size: 32px;"></span>
         </div>
 
-        <!-- Duck Attack y Deshacer arriba a la derecha -->
+
         <div style="position:absolute; top:80px; right:20px; z-index:5; display:flex; flex-direction:column; gap:8px;">
             <button onclick="duckAttack()" style="font-size:18px; padding:8px 18px; background-color:#f4511e; 
              color:white; border:none; border-radius:10px; cursor:pointer;">
-                🦆 Duck Attack!
+                Duck Attack
             </button>
             <button onclick="undoDuckAttack()" style="font-size:18px; padding:8px 18px; background-color:#555; 
              color:white; border:none; border-radius:10px; cursor:pointer;">
-                ↩️ Deshacer
+                Deshacer
             </button>
         </div>
 
     </div>
-
-
 
     <audio id="myAudio" src="../CodigoParcial2026/songs/backgroundSound.mp3" loop></audio>
     <audio id="endGame"></audio>

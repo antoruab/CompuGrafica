@@ -29,10 +29,10 @@ var posX = 3;
 var posY = 0.5;
 var posZ = 1;
 
-var position1 = [-1,0,6],
-    position2 = [11,0,6],
-    position3 = [-1,0,-6],
-    position4 = [11,0,-6];
+var position1 = [-1, 0, 6],
+  position2 = [11, 0, 6],
+  position3 = [-1, 0, -6],
+  position4 = [11, 0, -6];
 
 var Ducks = [];
 // ----------------------------
@@ -66,11 +66,11 @@ function animate() {
   movePlayer();
   collisionAnimate();
 
-  if(Ducks.length>0){
-    Ducks[0].position.x+=0.01
-    Ducks[1].position.z-=0.01;
-    Ducks[2].position.z+=0.01;
-    Ducks[3].position.x-=0.01;
+  if (Ducks.length > 0) {
+    Ducks[0].position.x += 0.01
+    Ducks[1].position.z -= 0.01;
+    Ducks[2].position.z += 0.01;
+    Ducks[3].position.x -= 0.01;
   }
 }
 
@@ -131,11 +131,11 @@ function createFistModel(generalPath, pathMtl, pathObj) {
   });
 }
 
-function createGltfFunction(generalPath, pathGltf, position,indice, scale) {
+function createGltfFunction(generalPath, pathGltf, position, indice, scale) {
   // Instantiate a loader
   const loader = new THREE.GLTFLoader();
 
-  console.log("This is my Duck "+indice);
+  console.log("This is my Duck " + indice);
   // Optional: Provide a DRACOLoader instance to decode compressed mesh data
   const dracoLoader = new THREE.DRACOLoader();
   dracoLoader.setDecoderPath(generalPath);//'/examples/js/libs/draco/'
@@ -157,8 +157,8 @@ function createGltfFunction(generalPath, pathGltf, position,indice, scale) {
       gltf.cameras; // Array<THREE.Camera>
       gltf.asset; // Object
 
-      gltf.scene.scale.set(scale,scale,scale);
-      gltf.scene.position.set(position[0],position[1],position[2]);
+      gltf.scene.scale.set(scale, scale, scale);
+      gltf.scene.position.set(position[0], position[1], position[2]);
 
     },
     // called while loading is progressing
@@ -186,11 +186,11 @@ function createLight() {
 
 function initWorld() {
   // Create Island
-  
-  var positionFather = [position1,position2,position3,position4];
+
+  var positionFather = [position1, position2, position3, position4];
 
   for (var i = 0; i < 4; i++) {
-    createGltfFunction("./modelos/other/", "./modelos/other/Duck.gltf",positionFather[i],i,0.3);
+    createGltfFunction("./modelos/other/", "./modelos/other/Duck.gltf", positionFather[i], i, 0.3);
   }
   createFistModel("./modelos/island/", "littleisle.mtl", "littleisle.obj");
 
@@ -269,6 +269,7 @@ function go2Play() {
   document.getElementById('cointainerOthers').style.display = 'block';
   playAudio(x);
   initialiseTimer();
+  updateLivesDisplay();
 }
 
 function initialiseTimer() {
@@ -301,6 +302,14 @@ function createFrontera() {
   collidableMeshList.push(worldWalls);
 }
 
+function updateLivesDisplay() {
+  var hearts = '';
+  for (var i = 0; i < lives; i++) hearts += '❤️';
+  for (var j = lives; j < 3; j++) hearts += '🖤';
+  document.getElementById("lives").innerHTML = hearts;
+}
+
+
 function collisionAnimate() {
 
   var originPoint = MovingCube.position.clone();
@@ -312,19 +321,44 @@ function collisionAnimate() {
 
     var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
     var collisionResults = ray.intersectObjects(collidableMeshList);
+    // DESPUÉS (correcto):
     if (collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()) {
-      document.getElementById("lives").innerHTML = lives;//'toco, '+ JSON.stringify(collisionResults[0].object.name);//points;
+      lives--;
+      updateLivesDisplay();
       camera.position.set(posX, posY, posZ);
       MovingCube.position.set(posX, posY, posZ);
-      // Aqui disminuir las vidas
-      if (lives == 0) {
+      if (lives <= 0) {
+        lives = 0;
+        updateLivesDisplay();              // 👈 que muestre los 3 corazones negros
         document.getElementById("lost").style.display = "block";
         document.getElementById("cointainerOthers").style.display = "none";
         pauseAudio(x);
         playAudio(y);
       }
+      break;
     } else {
-      document.getElementById("lives").innerHTML = lives; // 'no toco';  
+      updateLivesDisplay();
     }
   }
+}
+
+
+var duckAttackActive = false;
+function duckAttack() {
+  if (duckAttackActive) return; // evita activar dos veces
+  duckAttackActive = true;
+
+  Ducks.forEach(function (duck) {
+    if (duck) {
+      duck.scale.set(0.9, 0.9, 0.9); // 0.3 * 3 = 0.9
+    }
+  });
+
+}
+
+function undoDuckAttack() {
+  Ducks.forEach(function (duck) {
+    if (duck) duck.scale.set(0.3, 0.3, 0.3); // vuelve al tamaño original
+  });
+  duckAttackActive = false;
 }
