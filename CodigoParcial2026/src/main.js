@@ -321,7 +321,7 @@ function collisionAnimate() {
 
     var ray = new THREE.Raycaster(originPoint, directionVector.clone().normalize());
     var collisionResults = ray.intersectObjects(collidableMeshList);
-    // DESPUÉS (correcto):
+   
     if (collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()) {
       lives--;
       updateLivesDisplay();
@@ -329,7 +329,7 @@ function collisionAnimate() {
       MovingCube.position.set(posX, posY, posZ);
       if (lives <= 0) {
         lives = 0;
-        updateLivesDisplay();              // 👈 que muestre los 3 corazones negros
+        updateLivesDisplay();          
         document.getElementById("lost").style.display = "block";
         document.getElementById("cointainerOthers").style.display = "none";
         pauseAudio(x);
@@ -345,12 +345,12 @@ function collisionAnimate() {
 
 var duckAttackActive = false;
 function duckAttack() {
-  if (duckAttackActive) return; // evita activar dos veces
+  if (duckAttackActive) return;
   duckAttackActive = true;
 
   Ducks.forEach(function (duck) {
     if (duck) {
-      duck.scale.set(0.9, 0.9, 0.9); // 0.3 * 3 = 0.9
+      duck.scale.set(0.9, 0.9, 0.9);
     }
   });
 
@@ -358,7 +358,7 @@ function duckAttack() {
 
 function undoDuckAttack() {
   Ducks.forEach(function (duck) {
-    if (duck) duck.scale.set(0.3, 0.3, 0.3); // vuelve al tamaño original
+    if (duck) duck.scale.set(0.3, 0.3, 0.3);
   });
   duckAttackActive = false;
 }
