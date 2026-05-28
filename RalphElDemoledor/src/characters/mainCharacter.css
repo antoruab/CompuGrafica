@@ -389,3 +389,22 @@ body {
   0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(244,197,66,0.2); }
   50%       { opacity: 0.8; box-shadow: 0 0 18px rgba(244,197,66,0.5); }
 }
+
+.btn-back {
+  font-family: var(--font-pixel);
+  font-size: 9px;
+  color: #ccccdd;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  padding: 10px 22px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  margin-top: 1.2rem;
+  transition: color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.btn-back:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(244,197,66,0.25);
+}

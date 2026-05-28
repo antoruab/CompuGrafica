@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,12 +15,14 @@
   }
   </script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Montserrat:wght@400;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="./mainCharacter.css">
 </head>
+
 <body>
 
-  <!-- Fondo animado temático -->
   <div class="game-bg">
     <div class="bg-layer bg-stars"></div>
     <div class="bg-layer bg-glow g1"></div>
@@ -59,71 +62,71 @@
     <div class="title-wrap">
       <h1 class="char-title">— CHARACTER SELECT —</h1>
       <div class="title-underline"></div>
+       <a href="../../index.html" class="btn-back">← MENÚ PRINCIPAL</a>
     </div>
 
     <div class="char-layout">
 
-      <!-- Grid de personajes -->
       <div class="char-grid-wrapper">
         <div class="char-grid">
 
-          <div class="char-slot active" data-name="Ralph" data-role="Villano" data-int="40" data-str="98" data-ternura="30" data-crea="55">
+          <div class="char-slot active" data-name="Ralph" data-role="Villano" data-int="40" data-str="98"
+            data-ternura="30" data-crea="55">
             <div class="slot-inner">
-              <img src="../src/img/Ralph.png" alt="Ralph" class="char-slot-img">
+              <img src="../img/Ralph portada.jpg" alt="Ralph" class="char-slot-img">
               <span class="char-slot-label">Ralph</span>
             </div>
             <div class="slot-selected-ring"></div>
           </div>
 
-          <div class="char-slot" data-name="Felix" data-role="Héroe" data-int="80" data-str="50" data-ternura="90" data-crea="70">
+          <div class="char-slot locked" data-name="Felix">
             <div class="slot-inner">
-              <img src="../src/img/Felix.png" alt="Felix" class="char-slot-img">
+              <img src="../img/Portada felix.jpg" alt="Felix" class="char-slot-img">
               <span class="char-slot-label">Felix</span>
             </div>
-            <div class="slot-selected-ring"></div>
           </div>
 
-          <!-- Slots vacíos / bloqueados -->
-          <div class="char-slot locked">
+          <!-- PERSONAJE 3 -->
+          <div class="char-slot locked" data-name="Vanellope" data-img="../src/img/Vanellope.png">
             <div class="slot-inner">
-              <div class="lock-icon">🔒</div>
-              <span class="char-slot-label">???</span>
+              <img src="../img/Vanellope.jpg" alt="Vanellope" class="char-slot-img">
+              <span class="char-slot-label">Vanellope</span>
             </div>
           </div>
 
-          <div class="char-slot locked">
+          <!-- PERSONAJE 4 -->
+          <div class="char-slot locked" data-name="Calhoun" data-img="../src/img/Calhoun.png">
             <div class="slot-inner">
-              <div class="lock-icon">🔒</div>
-              <span class="char-slot-label">???</span>
+              <img src="../img/Calhoun.jpg" alt="Calhoun" class="char-slot-img">
+              <span class="char-slot-label">Calhoun</span>
             </div>
           </div>
 
-          <div class="char-slot locked">
+          <!-- PERSONAJE 5 -->
+          <div class="char-slot locked" data-name="King Candy" data-img="../src/img/KingCandy.png">
             <div class="slot-inner">
-              <div class="lock-icon">🔒</div>
-              <span class="char-slot-label">???</span>
+              <img src="../img/KingCandy.jpg" alt="King Candy" class="char-slot-img">
+              <span class="char-slot-label">King Candy</span>
             </div>
           </div>
 
-          <div class="char-slot locked">
+          <!-- PERSONAJE 6 -->
+          <div class="char-slot locked" data-name="Gene" data-img="../src/img/Gene.png">
             <div class="slot-inner">
-              <div class="lock-icon">🔒</div>
-              <span class="char-slot-label">???</span>
+              <img src="../img/Gene.jpg" alt="Gene" class="char-slot-img">
+              <span class="char-slot-label">Gene</span>
             </div>
           </div>
 
         </div>
       </div>
 
-      <!-- Panel de detalle -->
       <div class="char-detail">
         <div class="detail-header">
-          <div class="char-role" id="char-role">Villano</div>
+          <div class="char-role" id="char-role"></div>
           <div class="char-name" id="char-name">Ralph</div>
         </div>
 
-        <!-- Canvas Three.js — pon aquí tu GLB -->
-        <!-- RUTA DEL MODELO GLB: cambia 'src/models/ralph.glb' por la ruta real de tu archivo -->
         <div class="char-canvas-wrapper">
           <canvas id="charCanvas"></canvas>
           <div class="canvas-corner tl"></div>
@@ -132,32 +135,32 @@
           <div class="canvas-corner br"></div>
         </div>
 
-        <div class="char-stats" id="char-stats">
+        <div class="char-stats">
           <div class="stat-row">
             <span class="stat-label">Inteligencia</span>
             <div class="stat-bar-bg">
-              <div class="stat-bar" id="stat-int" style="width:40%; background:#5ecfff;"></div>
+              <div class="stat-bar" id="stat-int" style="width:40%;background:#5ecfff"></div>
             </div>
             <span class="stat-val" id="val-int">40</span>
           </div>
           <div class="stat-row">
             <span class="stat-label">Fuerza</span>
             <div class="stat-bar-bg">
-              <div class="stat-bar" id="stat-str" style="width:98%; background:#e8534a;"></div>
+              <div class="stat-bar" id="stat-str" style="width:98%;background:#e8534a"></div>
             </div>
             <span class="stat-val" id="val-str">98</span>
           </div>
           <div class="stat-row">
             <span class="stat-label">Ternura</span>
             <div class="stat-bar-bg">
-              <div class="stat-bar" id="stat-ter" style="width:30%; background:#a855f7;"></div>
+              <div class="stat-bar" id="stat-ter" style="width:30%;background:#a855f7"></div>
             </div>
             <span class="stat-val" id="val-ter">30</span>
           </div>
           <div class="stat-row">
             <span class="stat-label">Creatividad</span>
             <div class="stat-bar-bg">
-              <div class="stat-bar" id="stat-cre" style="width:55%; background:#f4c542;"></div>
+              <div class="stat-bar" id="stat-cre" style="width:55%;background:#f4c542"></div>
             </div>
             <span class="stat-val" id="val-cre">55</span>
           </div>
@@ -169,42 +172,9 @@
     </div>
   </div>
 
-  <audio loop autoplay id="myAudio3">
-    <source src="../src/sounds/intro.mp3" type="audio/mpeg">
-  </audio>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script type="module" src="./mainCharacter.js"></script>
 
-  <script>
-    // Interacción de slots
-    document.querySelectorAll('.char-slot:not(.locked)').forEach(slot => {
-      slot.addEventListener('click', () => {
-        document.querySelectorAll('.char-slot').forEach(s => s.classList.remove('active'));
-        slot.classList.add('active');
-
-        const name  = slot.dataset.name;
-        const role  = slot.dataset.role;
-        const int_  = slot.dataset.int;
-        const str   = slot.dataset.str;
-        const ter   = slot.dataset.ternura;
-        const cre   = slot.dataset.crea;
-
-        document.getElementById('char-name').textContent  = name;
-        document.getElementById('char-role').textContent  = role;
-
-        const animate = (el, valEl, val) => {
-          el.style.width = '0%';
-          setTimeout(() => { el.style.width = val + '%'; }, 30);
-          valEl.textContent = val;
-        };
-
-        animate(document.getElementById('stat-int'), document.getElementById('val-int'), int_);
-        animate(document.getElementById('stat-str'), document.getElementById('val-str'), str);
-        animate(document.getElementById('stat-ter'), document.getElementById('val-ter'), ter);
-        animate(document.getElementById('stat-cre'), document.getElementById('val-cre'), cre);
-      });
-    });
-  </script>
 </body>
+
 </html>
