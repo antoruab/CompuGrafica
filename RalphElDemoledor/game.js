@@ -9,30 +9,28 @@ const GAME = {
 };
 
 const PHYSICS = {
-  gravity:   -22,
-  jumpForce:  28, 
-  moveSpeed:   6,
+  gravity: -18,
+  jumpForce: 14,
+  moveSpeed: 6,
 };
 
-// ── RUTAS DE ARCHIVOS ──────────────────────────
 const PATHS = {
-  building:     'src/img/Edificio.png',
-  ralph:        'src/img/Ralph.png',
-  felix:        'src/img/Felix.png',
+  building: 'src/img/Edificio.png',
+  ralph: 'src/img/Ralph.png',
+  felix: 'src/img/Felix.png',
   windowBroken: 'src/img/Ventana_Rota.png',
   settingsIcon: 'src/img/configuracion.png',
-  music:        'src/audio/Soundtrack.mp3',
+  music: 'src/audio/Soundtrack.mp3',
 };
-// ──────────────────────────────────────────────
 
-const canvas   = document.getElementById('three-canvas');
+const canvas = document.getElementById('three-canvas');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type    = THREE.PCFSoftShadowMap;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.setClearColor(0x0a0a1a);
 
-const scene  = new THREE.Scene();
+const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 200);
 camera.position.set(0, 5, 20);
 camera.lookAt(0, 4, 0);
@@ -54,9 +52,9 @@ const dirLight = new THREE.DirectionalLight(0xfff8e0, 1.4);
 dirLight.position.set(6, 14, 8);
 dirLight.castShadow = true;
 dirLight.shadow.mapSize.set(2048, 2048);
-dirLight.shadow.camera.left   = -18;
-dirLight.shadow.camera.right  =  18;
-dirLight.shadow.camera.top    =  18;
+dirLight.shadow.camera.left = -18;
+dirLight.shadow.camera.right = 18;
+dirLight.shadow.camera.top = 18;
 dirLight.shadow.camera.bottom = -4;
 scene.add(dirLight);
 
@@ -66,7 +64,7 @@ scene.add(rimLight);
 
 const texLoader = new THREE.TextureLoader();
 
-const buildingTex  = texLoader.load(PATHS.building);
+const buildingTex = texLoader.load(PATHS.building);
 const buildingMesh = new THREE.Mesh(
   new THREE.PlaneGeometry(12, 18),
   new THREE.MeshBasicMaterial({ map: buildingTex, transparent: true, alphaTest: 0.05 })
@@ -76,21 +74,21 @@ scene.add(buildingMesh);
 
 // ── PLATAFORMAS ────────────────────────────────
 const PLATFORM_DEFS = [
-  { x: 0, y: 0.1,  w: 9.0 },
+  { x: 0, y: 0.1, w: 9.0 },
   { x: 0, y: 3.05, w: 8.5 },
   { x: 0, y: 6.15, w: 8.5 },
-  { x: 0, y: 9.0,  w: 8.5 },
+  { x: 0, y: 9.0, w: 8.5 },
   { x: 0, y: 11.7, w: 8.5 },
   { x: 0, y: 14.2, w: 8.0 },
 ];
 
 // Materiales invisibles pero con física activa
 const platMat = new THREE.MeshStandardMaterial({
-  visible: false 
+  visible: false
 });
 
 const platEdgeMat = new THREE.MeshStandardMaterial({
-  visible: false 
+  visible: false
 });
 
 const platforms = [];
@@ -116,20 +114,22 @@ PLATFORM_DEFS.forEach(def => {
   platforms.push({
     group,
     box: new THREE.Box3(
-      new THREE.Vector3(def.x - def.w / 2, def.y,        -0.1),
-      new THREE.Vector3(def.x + def.w / 2, def.y + 0.16,  1.0)
+      new THREE.Vector3(def.x - def.w / 2, def.y, -0.1),
+      new THREE.Vector3(def.x + def.w / 2, def.y + 0.16, 1.0)
     ),
     def,
   });
 });
 
 // ── VENTANAS ──────────────────────────────────
+// REEMPLAZA WINDOW_DEFS completo:
+// REEMPLAZA WINDOW_DEFS completo:
 const WINDOW_DEFS = [
-  { x: -2.5, y: 3.4,   floor: 1 }, { x: 0.0, y: 3.4,   floor: 1 }, { x: 2.5, y: 3.4,   floor: 1 },
-  { x: -2.5, y: 6.5,   floor: 2 }, { x: 0.0, y: 6.5,   floor: 2 }, { x: 2.5, y: 6.5,   floor: 2 },
-  { x: -2.5, y: 9.35,  floor: 3 }, { x: 0.0, y: 9.35,  floor: 3 }, { x: 2.5, y: 9.35,  floor: 3 },
-  { x: -2.5, y: 12.05, floor: 4 }, { x: 0.0, y: 12.05, floor: 4 }, { x: 2.5, y: 12.05, floor: 4 },
-  { x: -2.5, y: 14.55, floor: 5 }, { x: 0.0, y: 14.55, floor: 5 }, { x: 2.5, y: 14.55, floor: 5 },
+  { x: -2.8, y: 1.2,   floor: 1 }, { x: 0.0, y: 1.2,   floor: 1 }, { x: 2.8, y: 1.2,   floor: 1 },
+  { x: -2.8, y: 3.8,   floor: 2 }, { x: 0.0, y: 3.8,   floor: 2 }, { x: 2.8, y: 3.8,   floor: 2 },
+  { x: -2.8, y: 6.4,   floor: 3 }, { x: 0.0, y: 6.4,   floor: 3 }, { x: 2.8, y: 6.4,   floor: 3 },
+  { x: -2.8, y: 8.8,   floor: 4 }, { x: 0.0, y: 8.8,   floor: 4 }, { x: 2.8, y: 8.8,   floor: 4 },
+  { x: -2.8, y: 11.0,  floor: 5 }, { x: 0.0, y: 11.0,  floor: 5 }, { x: 2.8, y: 11.0,  floor: 5 },
 ];
 
 const brokenTex = texLoader.load(PATHS.windowBroken);
@@ -181,7 +181,7 @@ function hitWindow(win) {
     showPopup(win.def.x, win.def.y, '💥 -VIDA', true);
     return;
   }
-  
+
   win.state = 'broken';
   win.mesh.material.map = brokenTex;
   win.mesh.material.color.set(0xffffff);
@@ -189,8 +189,8 @@ function hitWindow(win) {
   win.mesh.material.emissiveIntensity = 0;
   win.mesh.material.opacity = 1.0;
   win.mesh.material.needsUpdate = true;
-  win.crackGroup.visible = false; 
-  
+  win.crackGroup.visible = false;
+
   GAME.score += 50;
   updateHUD();
   showPopup(win.def.x, win.def.y, '+50', false);
@@ -198,7 +198,7 @@ function hitWindow(win) {
 
 function repairWindow(win) {
   if (win.state === 'intact') return;
-  win.state    = 'intact';
+  win.state = 'intact';
   win.hitCount = 0;
   win.mesh.material.map = null;
   win.mesh.material.color.set(0x88ccff);
@@ -236,8 +236,8 @@ function showPopup(wx, wy, text, bad) {
   `;
   const v = new THREE.Vector3(wx, wy + 1.0, 0).project(camera);
   const wrap = document.getElementById('game-wrapper');
-  el.style.left = ((v.x * 0.5 + 0.5) * wrap.clientWidth)  + 'px';
-  el.style.top  = ((-v.y * 0.5 + 0.5) * wrap.clientHeight) + 'px';
+  el.style.left = ((v.x * 0.5 + 0.5) * wrap.clientWidth) + 'px';
+  el.style.top = ((-v.y * 0.5 + 0.5) * wrap.clientHeight) + 'px';
   wrap.appendChild(el);
   setTimeout(() => el.remove(), 900);
 }
@@ -274,7 +274,7 @@ const felix = {
 const felixSprite = new THREE.Sprite(
   new THREE.SpriteMaterial({ map: texLoader.load(PATHS.felix), transparent: true, alphaTest: 0.1 })
 );
-felixSprite.scale.set(2.4, 3.8, 1); // Felix más grande
+felixSprite.scale.set(4.2, 6.5, 1);
 felixSprite.visible = false;
 scene.add(felixSprite);
 felix.sprite = felixSprite;
@@ -308,7 +308,7 @@ function updateFelix(dt) {
       felix.state = 'moving';
       const dx = best.def.x - felix.pos.x;
       const dy = (best.def.y - 0.9) - felix.pos.y;
-      const len = Math.sqrt(dx*dx + dy*dy);
+      const len = Math.sqrt(dx * dx + dy * dy);
       if (len > 0.12) {
         felix.pos.x += (dx / len) * 3.5 * dt;
         felix.pos.y += (dy / len) * 3.5 * dt;
@@ -338,14 +338,14 @@ function resetFelix() {
 
 // ── JUGADOR ────────────────────────────────────
 const player = {
-  sprite:      null,
-  vel:         new THREE.Vector3(),
-  pos:         new THREE.Vector3(0, 0.3, 0.5),
-  onGround:    false,
+  sprite: null,
+  vel: new THREE.Vector3(),
+  pos: new THREE.Vector3(0, 0.3, 0.5),
+  onGround: false,
   facingRight: true,
-  width:       0.8,
-  height:      1.8,
-  canBreak:    true,
+  width: 0.8,
+  height: 1.8,
+  canBreak: true,
 };
 
 const ralphSprite = new THREE.Sprite(
@@ -364,17 +364,17 @@ window.addEventListener('keydown', e => {
 
   if (e.code === 'Space' && GAME.state === 'playing' && !GAME.paused && player.canBreak) {
     player.canBreak = false;
-    
+
     // Hitbox más amplia para detectar fácilmente todas las ventanas
     const pb = new THREE.Box3(
       new THREE.Vector3(player.pos.x - 0.8, player.pos.y - 0.5, -0.5),
       new THREE.Vector3(player.pos.x + 0.8, player.pos.y + player.height + 0.5, 1.2)
     );
-    
+
     for (const win of windows3D) {
       const wb = new THREE.Box3(
         new THREE.Vector3(win.def.x - 0.42, win.def.y - 0.52, -0.2),
-        new THREE.Vector3(win.def.x + 0.42, win.def.y + 0.52,  0.5)
+        new THREE.Vector3(win.def.x + 0.42, win.def.y + 0.52, 0.5)
       );
       if (pb.intersectsBox(wb)) { hitWindow(win); break; }
     }
@@ -391,8 +391,8 @@ const playerBox = new THREE.Box3();
 function updatePlayer(dt) {
   if (GAME.state !== 'playing' || GAME.paused) return;
 
-  const dir = (keys['KeyA'] || keys['ArrowLeft'])  ? -1 :
-              (keys['KeyD'] || keys['ArrowRight']) ?  1 : 0;
+  const dir = (keys['KeyA'] || keys['ArrowLeft']) ? -1 :
+    (keys['KeyD'] || keys['ArrowRight']) ? 1 : 0;
 
   player.vel.x = dir * PHYSICS.moveSpeed;
 
@@ -402,9 +402,19 @@ function updatePlayer(dt) {
   }
 
   if ((keys['KeyW'] || keys['ArrowUp']) && player.onGround) {
-    player.vel.y    = PHYSICS.jumpForce;
+    player.vel.y = PHYSICS.jumpForce;
     player.onGround = false;
+    player.jumping = true;
   }
+  if ((keys['KeyW'] || keys['ArrowUp']) && player.jumping && player.vel.y > 0) {
+    player.vel.y += 18 * dt;   // empuje continuo hacia arriba
+  }
+
+  if (!(keys['KeyW'] || keys['ArrowUp'])) {
+    player.jumping = false;
+    if (player.vel.y > 6) player.vel.y = 6;  // limita si sueltas a mitad
+  }
+
 
   player.vel.y += PHYSICS.gravity * dt;
   player.pos.x += player.vel.x * dt;
@@ -423,15 +433,16 @@ function updatePlayer(dt) {
   for (const plat of platforms) {
     if (playerBox.intersectsBox(plat.box)) {
       const platTop = plat.def.y + 0.16;
-      
+
       // Solo aterriza si está cayendo y no está presionando hacia abajo
       if (player.vel.y <= 0 && player.pos.y >= platTop - 0.5) {
         if (!isDropping) {
-          player.pos.y    = platTop;
-          player.vel.y    = 0;
+          player.pos.y = platTop;
+          player.vel.y = 0;
           player.onGround = true;
+          player.jumping = false;
         }
-      } 
+      }
     }
   }
 
@@ -443,13 +454,13 @@ function updatePlayer(dt) {
 }
 
 // ── AUDIO ─────────────────────────────────────
-const bgMusic    = new Audio(PATHS.music);
-bgMusic.loop     = true;
-bgMusic.volume   = 0.6;
+const bgMusic = new Audio(PATHS.music);
+bgMusic.loop = true;
+bgMusic.volume = 0.6;
 
 function startMusic() {
   bgMusic.currentTime = 0;
-  bgMusic.play().catch(() => {});
+  bgMusic.play().catch(() => { });
 }
 
 // ── TEMPORIZADOR ──────────────────────────────
@@ -457,7 +468,7 @@ let felixActivated = false;
 
 function startTimer() {
   clearInterval(GAME.timerInterval);
-  GAME.timeLeft  = 60;
+  GAME.timeLeft = 60;
   felixActivated = false;
   updateTimerHUD();
   GAME.timerInterval = setInterval(() => {
@@ -476,9 +487,9 @@ function startTimer() {
 }
 
 function updateTimerHUD() {
-  const el  = document.getElementById('timer-display');
+  const el = document.getElementById('timer-display');
   const sec = Math.max(0, GAME.timeLeft);
-  el.textContent = `${String(Math.floor(sec / 60)).padStart(2,'0')}:${String(sec % 60).padStart(2,'0')}`;
+  el.textContent = `${String(Math.floor(sec / 60)).padStart(2, '0')}:${String(sec % 60).padStart(2, '0')}`;
   el.classList.toggle('danger', sec <= 10);
 }
 
@@ -501,7 +512,7 @@ function loseLife() {
 function togglePause() {
   GAME.paused = !GAME.paused;
   if (GAME.paused) bgMusic.pause();
-  else             bgMusic.play();
+  else bgMusic.play();
 }
 
 function triggerGameOver() {
@@ -514,17 +525,37 @@ function triggerGameOver() {
     'PUNTOS: ' + String(GAME.score).padStart(6, '0');
 }
 
-function startGame() {
-  GAME.state    = 'playing';
-  GAME.score    = 0;
-  GAME.lives    = 3;
-  GAME.paused   = false;
+// Nueva función: reintentar quitando una vida
+function retryGame() {
+  GAME.lives = Math.max(0, GAME.lives - 1);
+  if (GAME.lives <= 0) {
+    startGame();
+    return;
+  }
+  GAME.state = 'playing';
+  GAME.paused = false;
   player.pos.set(0, 0.3, 0.5);
   player.vel.set(0, 0, 0);
   player.onGround = false;
   resetWindows();
   resetFelix();
-  document.getElementById('title-screen').style.display    = 'none';
+  document.getElementById('gameover-screen').style.display = 'none';
+  updateHUD();
+  startTimer();
+  startMusic();
+}
+
+function startGame() {
+  GAME.state = 'playing';
+  GAME.score = 0;
+  GAME.lives = 3;
+  GAME.paused = false;
+  player.pos.set(0, 0.3, 0.5);
+  player.vel.set(0, 0, 0);
+  player.onGround = false;
+  resetWindows();
+  resetFelix();
+  document.getElementById('title-screen').style.display = 'none';
   document.getElementById('gameover-screen').style.display = 'none';
   updateHUD();
   startTimer();
@@ -558,7 +589,7 @@ document.getElementById('close-settings').addEventListener('click', () => {
 });
 
 const volSlider = document.getElementById('vol-slider');
-const volValue  = document.getElementById('vol-value');
+const volValue = document.getElementById('vol-value');
 volSlider.addEventListener('input', () => {
   volValue.textContent = volSlider.value + '%';
   bgMusic.volume = volSlider.value / 100;
@@ -589,7 +620,7 @@ document.getElementById('custom-color').addEventListener('input', e => {
 });
 
 document.getElementById('start-btn').addEventListener('click', startGame);
-document.getElementById('restart-btn').addEventListener('click', startGame);
+document.getElementById('restart-btn').addEventListener('click', retryGame);
 
 // ── LOOP ──────────────────────────────────────
 const clock = new THREE.Clock();

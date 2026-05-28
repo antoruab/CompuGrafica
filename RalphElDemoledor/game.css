@@ -75,6 +75,12 @@ body {
 }
 
 /* ── WRAPPER & CANVAS ── */
+#chars-btn {
+  animation: none;
+  transition: filter 0.15s, transform 0.08s;
+}
+#chars-btn:hover { filter: brightness(1.15); }
+
 #game-wrapper {
   position: fixed;
   top: var(--navbar-h);
